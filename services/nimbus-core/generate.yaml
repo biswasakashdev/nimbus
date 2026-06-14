@@ -3,7 +3,7 @@ managed:
   enabled: true
   override:
     - file_option: go_package
-      value: proto-gen/client
+      value: proto-gen/public
 inputs:
   # Here we provide the proto files directly from github no need to clone at runtime.
 
@@ -18,6 +18,3 @@ plugins:
     out: services/nimbus-core
   - remote: buf.build/grpc/go:v1.6.2
     out: services/nimbus-core
-
-  - remote: buf.build/bufbuild/es
-    out: gen/ts

@@ -1,6 +1,6 @@
 // @generated
 /// Generated client implementations.
-pub mod nimbus_object_service_client {
+pub mod nimbus_public_object_service_client {
     #![allow(
         unused_variables,
         dead_code,
@@ -11,10 +11,10 @@ pub mod nimbus_object_service_client {
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct NimbusObjectServiceClient<T> {
+    pub struct NimbusPublicObjectServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl NimbusObjectServiceClient<tonic::transport::Channel> {
+    impl NimbusPublicObjectServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -25,7 +25,7 @@ pub mod nimbus_object_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> NimbusObjectServiceClient<T>
+    impl<T> NimbusPublicObjectServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::Body>,
         T::Error: Into<StdError>,
@@ -43,7 +43,7 @@ pub mod nimbus_object_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> NimbusObjectServiceClient<InterceptedService<T, F>>
+        ) -> NimbusPublicObjectServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -57,7 +57,9 @@ pub mod nimbus_object_service_client {
                 http::Request<tonic::body::Body>,
             >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
-            NimbusObjectServiceClient::new(InterceptedService::new(inner, interceptor))
+            NimbusPublicObjectServiceClient::new(
+                InterceptedService::new(inner, interceptor),
+            )
         }
         /// Compress requests with the given encoding.
         ///
@@ -109,13 +111,13 @@ pub mod nimbus_object_service_client {
                 })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/nimbus.v1.NimbusObjectService/CreateOrUpdateObject",
+                "/nimbus_public.v1.NimbusPublicObjectService/CreateOrUpdateObject",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "nimbus.v1.NimbusObjectService",
+                        "nimbus_public.v1.NimbusPublicObjectService",
                         "CreateOrUpdateObject",
                     ),
                 );
@@ -138,17 +140,51 @@ pub mod nimbus_object_service_client {
                 })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/nimbus.v1.NimbusObjectService/GetObject",
+                "/nimbus_public.v1.NimbusPublicObjectService/GetObject",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("nimbus.v1.NimbusObjectService", "GetObject"));
+                .insert(
+                    GrpcMethod::new(
+                        "nimbus_public.v1.NimbusPublicObjectService",
+                        "GetObject",
+                    ),
+                );
             self.inner.server_streaming(req, path, codec).await
+        }
+        pub async fn delete_object(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteObjectRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::DeleteObjectResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic_prost::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/nimbus_public.v1.NimbusPublicObjectService/DeleteObject",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "nimbus_public.v1.NimbusPublicObjectService",
+                        "DeleteObject",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod nimbus_object_service_server {
+pub mod nimbus_public_object_service_server {
     #![allow(
         unused_variables,
         dead_code,
@@ -157,9 +193,9 @@ pub mod nimbus_object_service_server {
         clippy::let_unit_value,
     )]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with NimbusObjectServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with NimbusPublicObjectServiceServer.
     #[async_trait]
-    pub trait NimbusObjectService: std::marker::Send + std::marker::Sync + 'static {
+    pub trait NimbusPublicObjectService: std::marker::Send + std::marker::Sync + 'static {
         async fn create_or_update_object(
             &self,
             request: tonic::Request<tonic::Streaming<super::CreateOrUpdateObjectRequest>>,
@@ -177,16 +213,23 @@ pub mod nimbus_object_service_server {
             &self,
             request: tonic::Request<super::GetObjectRequest>,
         ) -> std::result::Result<tonic::Response<Self::GetObjectStream>, tonic::Status>;
+        async fn delete_object(
+            &self,
+            request: tonic::Request<super::DeleteObjectRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::DeleteObjectResponse>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
-    pub struct NimbusObjectServiceServer<T> {
+    pub struct NimbusPublicObjectServiceServer<T> {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T> NimbusObjectServiceServer<T> {
+    impl<T> NimbusPublicObjectServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -237,9 +280,10 @@ pub mod nimbus_object_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for NimbusObjectServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>>
+    for NimbusPublicObjectServiceServer<T>
     where
-        T: NimbusObjectService,
+        T: NimbusPublicObjectService,
         B: Body + std::marker::Send + 'static,
         B::Error: Into<StdError> + std::marker::Send + 'static,
     {
@@ -254,11 +298,13 @@ pub mod nimbus_object_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/nimbus.v1.NimbusObjectService/CreateOrUpdateObject" => {
+                "/nimbus_public.v1.NimbusPublicObjectService/CreateOrUpdateObject" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateOrUpdateObjectSvc<T: NimbusObjectService>(pub Arc<T>);
+                    struct CreateOrUpdateObjectSvc<T: NimbusPublicObjectService>(
+                        pub Arc<T>,
+                    );
                     impl<
-                        T: NimbusObjectService,
+                        T: NimbusPublicObjectService,
                     > tonic::server::ClientStreamingService<
                         super::CreateOrUpdateObjectRequest,
                     > for CreateOrUpdateObjectSvc<T> {
@@ -275,7 +321,7 @@ pub mod nimbus_object_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as NimbusObjectService>::create_or_update_object(
+                                <T as NimbusPublicObjectService>::create_or_update_object(
                                         &inner,
                                         request,
                                     )
@@ -306,11 +352,11 @@ pub mod nimbus_object_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/nimbus.v1.NimbusObjectService/GetObject" => {
+                "/nimbus_public.v1.NimbusPublicObjectService/GetObject" => {
                     #[allow(non_camel_case_types)]
-                    struct GetObjectSvc<T: NimbusObjectService>(pub Arc<T>);
+                    struct GetObjectSvc<T: NimbusPublicObjectService>(pub Arc<T>);
                     impl<
-                        T: NimbusObjectService,
+                        T: NimbusPublicObjectService,
                     > tonic::server::ServerStreamingService<super::GetObjectRequest>
                     for GetObjectSvc<T> {
                         type Response = super::GetObjectResponse;
@@ -325,7 +371,10 @@ pub mod nimbus_object_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as NimbusObjectService>::get_object(&inner, request)
+                                <T as NimbusPublicObjectService>::get_object(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -353,6 +402,55 @@ pub mod nimbus_object_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/nimbus_public.v1.NimbusPublicObjectService/DeleteObject" => {
+                    #[allow(non_camel_case_types)]
+                    struct DeleteObjectSvc<T: NimbusPublicObjectService>(pub Arc<T>);
+                    impl<
+                        T: NimbusPublicObjectService,
+                    > tonic::server::UnaryService<super::DeleteObjectRequest>
+                    for DeleteObjectSvc<T> {
+                        type Response = super::DeleteObjectResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::DeleteObjectRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as NimbusPublicObjectService>::delete_object(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = DeleteObjectSvc(inner);
+                        let codec = tonic_prost::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 _ => {
                     Box::pin(async move {
                         let mut response = http::Response::new(
@@ -375,7 +473,7 @@ pub mod nimbus_object_service_server {
             }
         }
     }
-    impl<T> Clone for NimbusObjectServiceServer<T> {
+    impl<T> Clone for NimbusPublicObjectServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -388,13 +486,13 @@ pub mod nimbus_object_service_server {
         }
     }
     /// Generated gRPC service name
-    pub const SERVICE_NAME: &str = "nimbus.v1.NimbusObjectService";
-    impl<T> tonic::server::NamedService for NimbusObjectServiceServer<T> {
+    pub const SERVICE_NAME: &str = "nimbus_public.v1.NimbusPublicObjectService";
+    impl<T> tonic::server::NamedService for NimbusPublicObjectServiceServer<T> {
         const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Generated client implementations.
-pub mod nimbus_service_client {
+pub mod nimbus_public_service_client {
     #![allow(
         unused_variables,
         dead_code,
@@ -405,10 +503,10 @@ pub mod nimbus_service_client {
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct NimbusServiceClient<T> {
+    pub struct NimbusPublicServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl NimbusServiceClient<tonic::transport::Channel> {
+    impl NimbusPublicServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -419,7 +517,7 @@ pub mod nimbus_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> NimbusServiceClient<T>
+    impl<T> NimbusPublicServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::Body>,
         T::Error: Into<StdError>,
@@ -437,7 +535,7 @@ pub mod nimbus_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> NimbusServiceClient<InterceptedService<T, F>>
+        ) -> NimbusPublicServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -451,7 +549,7 @@ pub mod nimbus_service_client {
                 http::Request<tonic::body::Body>,
             >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
-            NimbusServiceClient::new(InterceptedService::new(inner, interceptor))
+            NimbusPublicServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -501,35 +599,16 @@ pub mod nimbus_service_client {
                 })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/nimbus.v1.NimbusService/UpdateAccessType",
+                "/nimbus_public.v1.NimbusPublicService/UpdateAccessType",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("nimbus.v1.NimbusService", "UpdateAccessType"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn delete_object(
-            &mut self,
-            request: impl tonic::IntoRequest<super::DeleteObjectRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::DeleteObjectResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/nimbus.v1.NimbusService/DeleteObject",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("nimbus.v1.NimbusService", "DeleteObject"));
+                .insert(
+                    GrpcMethod::new(
+                        "nimbus_public.v1.NimbusPublicService",
+                        "UpdateAccessType",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
         pub async fn get_directory_content(
@@ -549,12 +628,15 @@ pub mod nimbus_service_client {
                 })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/nimbus.v1.NimbusService/GetDirectoryContent",
+                "/nimbus_public.v1.NimbusPublicService/GetDirectoryContent",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("nimbus.v1.NimbusService", "GetDirectoryContent"),
+                    GrpcMethod::new(
+                        "nimbus_public.v1.NimbusPublicService",
+                        "GetDirectoryContent",
+                    ),
                 );
             self.inner.server_streaming(req, path, codec).await
         }
@@ -575,17 +657,22 @@ pub mod nimbus_service_client {
                 })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/nimbus.v1.NimbusService/FindObjectByName",
+                "/nimbus_public.v1.NimbusPublicService/FindObjectByName",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("nimbus.v1.NimbusService", "FindObjectByName"));
+                .insert(
+                    GrpcMethod::new(
+                        "nimbus_public.v1.NimbusPublicService",
+                        "FindObjectByName",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod nimbus_service_server {
+pub mod nimbus_public_service_server {
     #![allow(
         unused_variables,
         dead_code,
@@ -594,21 +681,14 @@ pub mod nimbus_service_server {
         clippy::let_unit_value,
     )]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with NimbusServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with NimbusPublicServiceServer.
     #[async_trait]
-    pub trait NimbusService: std::marker::Send + std::marker::Sync + 'static {
+    pub trait NimbusPublicService: std::marker::Send + std::marker::Sync + 'static {
         async fn update_access_type(
             &self,
             request: tonic::Request<super::UpdateAccessTypeRequest>,
         ) -> std::result::Result<
             tonic::Response<super::UpdateAccessTypeResponse>,
-            tonic::Status,
-        >;
-        async fn delete_object(
-            &self,
-            request: tonic::Request<super::DeleteObjectRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::DeleteObjectResponse>,
             tonic::Status,
         >;
         /// Server streaming response type for the GetDirectoryContent method.
@@ -636,14 +716,14 @@ pub mod nimbus_service_server {
         >;
     }
     #[derive(Debug)]
-    pub struct NimbusServiceServer<T> {
+    pub struct NimbusPublicServiceServer<T> {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T> NimbusServiceServer<T> {
+    impl<T> NimbusPublicServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -694,9 +774,9 @@ pub mod nimbus_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for NimbusServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for NimbusPublicServiceServer<T>
     where
-        T: NimbusService,
+        T: NimbusPublicService,
         B: Body + std::marker::Send + 'static,
         B::Error: Into<StdError> + std::marker::Send + 'static,
     {
@@ -711,11 +791,11 @@ pub mod nimbus_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/nimbus.v1.NimbusService/UpdateAccessType" => {
+                "/nimbus_public.v1.NimbusPublicService/UpdateAccessType" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateAccessTypeSvc<T: NimbusService>(pub Arc<T>);
+                    struct UpdateAccessTypeSvc<T: NimbusPublicService>(pub Arc<T>);
                     impl<
-                        T: NimbusService,
+                        T: NimbusPublicService,
                     > tonic::server::UnaryService<super::UpdateAccessTypeRequest>
                     for UpdateAccessTypeSvc<T> {
                         type Response = super::UpdateAccessTypeResponse;
@@ -729,7 +809,10 @@ pub mod nimbus_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as NimbusService>::update_access_type(&inner, request)
+                                <T as NimbusPublicService>::update_access_type(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -757,56 +840,11 @@ pub mod nimbus_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/nimbus.v1.NimbusService/DeleteObject" => {
+                "/nimbus_public.v1.NimbusPublicService/GetDirectoryContent" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteObjectSvc<T: NimbusService>(pub Arc<T>);
+                    struct GetDirectoryContentSvc<T: NimbusPublicService>(pub Arc<T>);
                     impl<
-                        T: NimbusService,
-                    > tonic::server::UnaryService<super::DeleteObjectRequest>
-                    for DeleteObjectSvc<T> {
-                        type Response = super::DeleteObjectResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::DeleteObjectRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as NimbusService>::delete_object(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = DeleteObjectSvc(inner);
-                        let codec = tonic_prost::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/nimbus.v1.NimbusService/GetDirectoryContent" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetDirectoryContentSvc<T: NimbusService>(pub Arc<T>);
-                    impl<
-                        T: NimbusService,
+                        T: NimbusPublicService,
                     > tonic::server::ServerStreamingService<
                         super::GetDirectoryContentRequest,
                     > for GetDirectoryContentSvc<T> {
@@ -822,7 +860,10 @@ pub mod nimbus_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as NimbusService>::get_directory_content(&inner, request)
+                                <T as NimbusPublicService>::get_directory_content(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -850,11 +891,11 @@ pub mod nimbus_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/nimbus.v1.NimbusService/FindObjectByName" => {
+                "/nimbus_public.v1.NimbusPublicService/FindObjectByName" => {
                     #[allow(non_camel_case_types)]
-                    struct FindObjectByNameSvc<T: NimbusService>(pub Arc<T>);
+                    struct FindObjectByNameSvc<T: NimbusPublicService>(pub Arc<T>);
                     impl<
-                        T: NimbusService,
+                        T: NimbusPublicService,
                     > tonic::server::UnaryService<super::FindObjectByNameRequest>
                     for FindObjectByNameSvc<T> {
                         type Response = super::FindObjectByNameResponse;
@@ -868,7 +909,10 @@ pub mod nimbus_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as NimbusService>::find_object_by_name(&inner, request)
+                                <T as NimbusPublicService>::find_object_by_name(
+                                        &inner,
+                                        request,
+                                    )
                                     .await
                             };
                             Box::pin(fut)
@@ -918,7 +962,7 @@ pub mod nimbus_service_server {
             }
         }
     }
-    impl<T> Clone for NimbusServiceServer<T> {
+    impl<T> Clone for NimbusPublicServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -931,8 +975,8 @@ pub mod nimbus_service_server {
         }
     }
     /// Generated gRPC service name
-    pub const SERVICE_NAME: &str = "nimbus.v1.NimbusService";
-    impl<T> tonic::server::NamedService for NimbusServiceServer<T> {
+    pub const SERVICE_NAME: &str = "nimbus_public.v1.NimbusPublicService";
+    impl<T> tonic::server::NamedService for NimbusPublicServiceServer<T> {
         const NAME: &'static str = SERVICE_NAME;
     }
 }

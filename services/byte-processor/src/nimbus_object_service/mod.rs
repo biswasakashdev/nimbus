@@ -1,6 +1,7 @@
 use nimbus_proto::{
-    CreateOrUpdateObjectRequest, CreateOrUpdateObjectResponse, GetObjectRequest, GetObjectResponse,
-    nimbus_object_service_server::NimbusObjectService,
+    CreateOrUpdateObjectRequest, CreateOrUpdateObjectResponse, DeleteObjectRequest,
+    DeleteObjectResponse, GetObjectRequest, GetObjectResponse,
+    nimbus_public_object_service_server::NimbusPublicObjectService,
 };
 use std::pin::Pin;
 use tokio::sync::mpsc;
@@ -10,19 +11,21 @@ use tonic::{Request, Response, Status, Streaming};
 pub mod nimbus_proto {
     pub mod types {
         pub mod v1 {
-            include!("../proto-gen/nimbus/v1/types/v1/nimbus.v1.types.v1.rs");
+            include!("../proto-gen/nimbus_public/v1/types/v1/nimbus_public.v1.types.v1.rs");
         }
     }
 
-    include!("../proto-gen/nimbus/v1/nimbus.v1.rs");
+    include!("../proto-gen/nimbus_public/v1/nimbus_public.v1.rs");
 }
 #[derive(Default, Debug)]
 pub struct ByteProcessorService {}
 
 #[tonic::async_trait]
-impl NimbusObjectService for ByteProcessorService {
+impl NimbusPublicObjectService for ByteProcessorService {
     // Define the type signature for our response stream
     type GetObjectStream = Pin<Box<dyn Stream<Item = Result<GetObjectResponse, Status>> + Send>>;
+
+    // Handler to create object and process the bytes.
     async fn create_or_update_object(
         &self,
         request: Request<Streaming<CreateOrUpdateObjectRequest>>,
@@ -60,5 +63,14 @@ impl NimbusObjectService for ByteProcessorService {
         Ok(Response::from(
             Box::pin(output_stream) as Self::GetObjectStream
         ))
+    }
+
+    async fn delete_object(
+        &self,
+        request: Request<DeleteObjectRequest>,
+    ) -> std::result::Result<Response<DeleteObjectResponse>, Status> {
+        let req: DeleteObjectRequest = request.into_inner();
+        println!("{}", req.object_ids.len());
+        Ok(Response::new(DeleteObjectResponse::default()))
     }
 }

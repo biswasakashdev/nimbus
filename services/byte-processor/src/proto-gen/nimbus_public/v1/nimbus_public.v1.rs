@@ -34,45 +34,15 @@ pub struct GetObjectResponse {
     #[prost(bytes="vec", tag="1")]
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
-/// Status represents the status of an operation.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum Status {
-    Unspecified = 0,
-    Failed = 1,
-    Success = 2,
-}
-impl Status {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::Unspecified => "STATUS_UNSPECIFIED",
-            Self::Failed => "STATUS_FAILED",
-            Self::Success => "STATUS_SUCCESS",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "STATUS_UNSPECIFIED" => Some(Self::Unspecified),
-            "STATUS_FAILED" => Some(Self::Failed),
-            "STATUS_SUCCESS" => Some(Self::Success),
-            _ => None,
-        }
-    }
-}
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeleteObjectRequest {
     #[prost(string, repeated, tag="1")]
-    pub object_id: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub object_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeleteObjectResponse {
     #[prost(string, repeated, tag="1")]
-    pub object_id: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub object_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccessTypeRequest {
@@ -134,5 +104,5 @@ pub mod find_object_by_name_response {
         Error(::prost::alloc::string::String),
     }
 }
-include!("nimbus.v1.tonic.rs");
+include!("nimbus_public.v1.tonic.rs");
 // @@protoc_insertion_point(module)

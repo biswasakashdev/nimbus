@@ -2,14 +2,14 @@
 // @generated from file nimbus/v1/nimbus_object_service.proto (package nimbus.v1, syntax proto3)
 /* eslint-disable */
 
-import { enumDesc, fileDesc, messageDesc, serviceDesc, tsEnum } from "@bufbuild/protobuf/codegenv2";
+import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_nimbus_v1_types_v1_files } from "./types/v1/files_pb";
 
 /**
  * Describes the file nimbus/v1/nimbus_object_service.proto.
  */
 export const file_nimbus_v1_nimbus_object_service = /*@__PURE__*/
-  fileDesc("CiVuaW1idXMvdjEvbmltYnVzX29iamVjdF9zZXJ2aWNlLnByb3RvEgluaW1idXMudjEiKwobQ3JlYXRlT3JVcGRhdGVPYmplY3RSZXF1ZXN0EgwKBGRhdGEYASABKAwigAEKHENyZWF0ZU9yVXBkYXRlT2JqZWN0UmVzcG9uc2USFwoNZXJyb3JfbWVzc2FnZRgCIAEoCUgAEjsKDm9iamVjdF9kZXRhaWxzGAMgASgLMiEubmltYnVzLnYxLnR5cGVzLnYxLk9iamVjdERldGFpbHNIAEIKCghyZXNwb25zZSIlChBHZXRPYmplY3RSZXF1ZXN0EhEKCW9iamVjdF9pZBgBIAEoCSIhChFHZXRPYmplY3RSZXNwb25zZRIMCgRkYXRhGAEgASgMKkcKBlN0YXR1cxIWChJTVEFUVVNfVU5TUEVDSUZJRUQQABIRCg1TVEFUVVNfRkFJTEVEEAESEgoOU1RBVFVTX1NVQ0NFU1MQAjLKAQoTTmltYnVzT2JqZWN0U2VydmljZRJpChRDcmVhdGVPclVwZGF0ZU9iamVjdBImLm5pbWJ1cy52MS5DcmVhdGVPclVwZGF0ZU9iamVjdFJlcXVlc3QaJy5uaW1idXMudjEuQ3JlYXRlT3JVcGRhdGVPYmplY3RSZXNwb25zZSgBEkgKCUdldE9iamVjdBIbLm5pbWJ1cy52MS5HZXRPYmplY3RSZXF1ZXN0GhwubmltYnVzLnYxLkdldE9iamVjdFJlc3BvbnNlMAFCgAEKDWNvbS5uaW1idXMudjFCGE5pbWJ1c09iamVjdFNlcnZpY2VQcm90b1ABWhBwcm90by1nZW4vY2xpZW50ogIDTlhYqgIJTmltYnVzLlYxygIJTmltYnVzXFYx4gIVTmltYnVzXFYxXEdQQk1ldGFkYXRh6gIKTmltYnVzOjpWMWIGcHJvdG8z", [file_nimbus_v1_types_v1_files]);
+  fileDesc("CiVuaW1idXMvdjEvbmltYnVzX29iamVjdF9zZXJ2aWNlLnByb3RvEgluaW1idXMudjEiKwobQ3JlYXRlT3JVcGRhdGVPYmplY3RSZXF1ZXN0EgwKBGRhdGEYASABKAwigAEKHENyZWF0ZU9yVXBkYXRlT2JqZWN0UmVzcG9uc2USFwoNZXJyb3JfbWVzc2FnZRgCIAEoCUgAEjsKDm9iamVjdF9kZXRhaWxzGAMgASgLMiEubmltYnVzLnYxLnR5cGVzLnYxLk9iamVjdERldGFpbHNIAEIKCghyZXNwb25zZSIlChBHZXRPYmplY3RSZXF1ZXN0EhEKCW9iamVjdF9pZBgBIAEoCSIhChFHZXRPYmplY3RSZXNwb25zZRIMCgRkYXRhGAEgASgMIigKE0RlbGV0ZU9iamVjdFJlcXVlc3QSEQoJb2JqZWN0X2lkGAEgAygJIikKFERlbGV0ZU9iamVjdFJlc3BvbnNlEhEKCW9iamVjdF9pZBgBIAMoCTKbAgoTTmltYnVzT2JqZWN0U2VydmljZRJpChRDcmVhdGVPclVwZGF0ZU9iamVjdBImLm5pbWJ1cy52MS5DcmVhdGVPclVwZGF0ZU9iamVjdFJlcXVlc3QaJy5uaW1idXMudjEuQ3JlYXRlT3JVcGRhdGVPYmplY3RSZXNwb25zZSgBEkgKCUdldE9iamVjdBIbLm5pbWJ1cy52MS5HZXRPYmplY3RSZXF1ZXN0GhwubmltYnVzLnYxLkdldE9iamVjdFJlc3BvbnNlMAESTwoMRGVsZXRlT2JqZWN0Eh4ubmltYnVzLnYxLkRlbGV0ZU9iamVjdFJlcXVlc3QaHy5uaW1idXMudjEuRGVsZXRlT2JqZWN0UmVzcG9uc2VCgAEKDWNvbS5uaW1idXMudjFCGE5pbWJ1c09iamVjdFNlcnZpY2VQcm90b1ABWhBwcm90by1nZW4vY2xpZW50ogIDTlhYqgIJTmltYnVzLlYxygIJTmltYnVzXFYx4gIVTmltYnVzXFYxXEdQQk1ldGFkYXRh6gIKTmltYnVzOjpWMWIGcHJvdG8z", [file_nimbus_v1_types_v1_files]);
 
 /**
  * Describes the message nimbus.v1.CreateOrUpdateObjectRequest.
@@ -40,18 +40,18 @@ export const GetObjectResponseSchema = /*@__PURE__*/
   messageDesc(file_nimbus_v1_nimbus_object_service, 3);
 
 /**
- * Describes the enum nimbus.v1.Status.
+ * Describes the message nimbus.v1.DeleteObjectRequest.
+ * Use `create(DeleteObjectRequestSchema)` to create a new message.
  */
-export const StatusSchema = /*@__PURE__*/
-  enumDesc(file_nimbus_v1_nimbus_object_service, 0);
+export const DeleteObjectRequestSchema = /*@__PURE__*/
+  messageDesc(file_nimbus_v1_nimbus_object_service, 4);
 
 /**
- * Status represents the status of an operation.
- *
- * @generated from enum nimbus.v1.Status
+ * Describes the message nimbus.v1.DeleteObjectResponse.
+ * Use `create(DeleteObjectResponseSchema)` to create a new message.
  */
-export const Status = /*@__PURE__*/
-  tsEnum(StatusSchema);
+export const DeleteObjectResponseSchema = /*@__PURE__*/
+  messageDesc(file_nimbus_v1_nimbus_object_service, 5);
 
 /**
  * This service is only to used to send and recive the raw data bytes.

@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: nimbus/v1/types/v1/files.proto
+// source: nimbus_public/v1/types/v1/files.proto
 
-package client
+package public
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -55,11 +55,11 @@ func (x ObjectType) String() string {
 }
 
 func (ObjectType) Descriptor() protoreflect.EnumDescriptor {
-	return file_nimbus_v1_types_v1_files_proto_enumTypes[0].Descriptor()
+	return file_nimbus_public_v1_types_v1_files_proto_enumTypes[0].Descriptor()
 }
 
 func (ObjectType) Type() protoreflect.EnumType {
-	return &file_nimbus_v1_types_v1_files_proto_enumTypes[0]
+	return &file_nimbus_public_v1_types_v1_files_proto_enumTypes[0]
 }
 
 func (x ObjectType) Number() protoreflect.EnumNumber {
@@ -68,7 +68,7 @@ func (x ObjectType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ObjectType.Descriptor instead.
 func (ObjectType) EnumDescriptor() ([]byte, []int) {
-	return file_nimbus_v1_types_v1_files_proto_rawDescGZIP(), []int{0}
+	return file_nimbus_public_v1_types_v1_files_proto_rawDescGZIP(), []int{0}
 }
 
 // Either Public or Private
@@ -105,11 +105,11 @@ func (x AccessType) String() string {
 }
 
 func (AccessType) Descriptor() protoreflect.EnumDescriptor {
-	return file_nimbus_v1_types_v1_files_proto_enumTypes[1].Descriptor()
+	return file_nimbus_public_v1_types_v1_files_proto_enumTypes[1].Descriptor()
 }
 
 func (AccessType) Type() protoreflect.EnumType {
-	return &file_nimbus_v1_types_v1_files_proto_enumTypes[1]
+	return &file_nimbus_public_v1_types_v1_files_proto_enumTypes[1]
 }
 
 func (x AccessType) Number() protoreflect.EnumNumber {
@@ -118,21 +118,21 @@ func (x AccessType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AccessType.Descriptor instead.
 func (AccessType) EnumDescriptor() ([]byte, []int) {
-	return file_nimbus_v1_types_v1_files_proto_rawDescGZIP(), []int{1}
+	return file_nimbus_public_v1_types_v1_files_proto_rawDescGZIP(), []int{1}
 }
 
 // The access information of an object it can be used via public url or only access using personal access token.
 type ObjectAccessInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ObjectId      string                 `protobuf:"bytes,1,opt,name=object_id,json=objectId,proto3" json:"object_id,omitempty"`
-	AccessType    AccessType             `protobuf:"varint,2,opt,name=access_type,json=accessType,proto3,enum=nimbus.v1.types.v1.AccessType" json:"access_type,omitempty"`
+	AccessType    AccessType             `protobuf:"varint,2,opt,name=access_type,json=accessType,proto3,enum=nimbus_public.v1.types.v1.AccessType" json:"access_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ObjectAccessInfo) Reset() {
 	*x = ObjectAccessInfo{}
-	mi := &file_nimbus_v1_types_v1_files_proto_msgTypes[0]
+	mi := &file_nimbus_public_v1_types_v1_files_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -144,7 +144,7 @@ func (x *ObjectAccessInfo) String() string {
 func (*ObjectAccessInfo) ProtoMessage() {}
 
 func (x *ObjectAccessInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_nimbus_v1_types_v1_files_proto_msgTypes[0]
+	mi := &file_nimbus_public_v1_types_v1_files_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -157,7 +157,7 @@ func (x *ObjectAccessInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObjectAccessInfo.ProtoReflect.Descriptor instead.
 func (*ObjectAccessInfo) Descriptor() ([]byte, []int) {
-	return file_nimbus_v1_types_v1_files_proto_rawDescGZIP(), []int{0}
+	return file_nimbus_public_v1_types_v1_files_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ObjectAccessInfo) GetObjectId() string {
@@ -177,10 +177,10 @@ func (x *ObjectAccessInfo) GetAccessType() AccessType {
 // The details of any object it can be file or a directory and the access url if the object is public otherwise it can be only access via personal access token.
 type ObjectDetails struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
-	ObjectType ObjectType             `protobuf:"varint,1,opt,name=object_type,json=objectType,proto3,enum=nimbus.v1.types.v1.ObjectType" json:"object_type,omitempty"`
+	ObjectType ObjectType             `protobuf:"varint,1,opt,name=object_type,json=objectType,proto3,enum=nimbus_public.v1.types.v1.ObjectType" json:"object_type,omitempty"`
 	ObjectId   string                 `protobuf:"bytes,2,opt,name=object_id,json=objectId,proto3" json:"object_id,omitempty"`
 	ObjectSize uint64                 `protobuf:"varint,3,opt,name=object_size,json=objectSize,proto3" json:"object_size,omitempty"`
-	AccessType AccessType             `protobuf:"varint,4,opt,name=access_type,json=accessType,proto3,enum=nimbus.v1.types.v1.AccessType" json:"access_type,omitempty"`
+	AccessType AccessType             `protobuf:"varint,4,opt,name=access_type,json=accessType,proto3,enum=nimbus_public.v1.types.v1.AccessType" json:"access_type,omitempty"`
 	CreatedOn  string                 `protobuf:"bytes,5,opt,name=created_on,json=createdOn,proto3" json:"created_on,omitempty"`
 	// The access url of a directory is referd as static directory which serve static contents.
 	AccessUrl     *string `protobuf:"bytes,6,opt,name=access_url,json=accessUrl,proto3,oneof" json:"access_url,omitempty"`
@@ -190,7 +190,7 @@ type ObjectDetails struct {
 
 func (x *ObjectDetails) Reset() {
 	*x = ObjectDetails{}
-	mi := &file_nimbus_v1_types_v1_files_proto_msgTypes[1]
+	mi := &file_nimbus_public_v1_types_v1_files_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -202,7 +202,7 @@ func (x *ObjectDetails) String() string {
 func (*ObjectDetails) ProtoMessage() {}
 
 func (x *ObjectDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_nimbus_v1_types_v1_files_proto_msgTypes[1]
+	mi := &file_nimbus_public_v1_types_v1_files_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -215,7 +215,7 @@ func (x *ObjectDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObjectDetails.ProtoReflect.Descriptor instead.
 func (*ObjectDetails) Descriptor() ([]byte, []int) {
-	return file_nimbus_v1_types_v1_files_proto_rawDescGZIP(), []int{1}
+	return file_nimbus_public_v1_types_v1_files_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ObjectDetails) GetObjectType() ObjectType {
@@ -260,22 +260,22 @@ func (x *ObjectDetails) GetAccessUrl() string {
 	return ""
 }
 
-var File_nimbus_v1_types_v1_files_proto protoreflect.FileDescriptor
+var File_nimbus_public_v1_types_v1_files_proto protoreflect.FileDescriptor
 
-const file_nimbus_v1_types_v1_files_proto_rawDesc = "" +
+const file_nimbus_public_v1_types_v1_files_proto_rawDesc = "" +
 	"\n" +
-	"\x1enimbus/v1/types/v1/files.proto\x12\x12nimbus.v1.types.v1\"p\n" +
+	"%nimbus_public/v1/types/v1/files.proto\x12\x19nimbus_public.v1.types.v1\"w\n" +
 	"\x10ObjectAccessInfo\x12\x1b\n" +
-	"\tobject_id\x18\x01 \x01(\tR\bobjectId\x12?\n" +
-	"\vaccess_type\x18\x02 \x01(\x0e2\x1e.nimbus.v1.types.v1.AccessTypeR\n" +
-	"accessType\"\xa1\x02\n" +
-	"\rObjectDetails\x12?\n" +
-	"\vobject_type\x18\x01 \x01(\x0e2\x1e.nimbus.v1.types.v1.ObjectTypeR\n" +
+	"\tobject_id\x18\x01 \x01(\tR\bobjectId\x12F\n" +
+	"\vaccess_type\x18\x02 \x01(\x0e2%.nimbus_public.v1.types.v1.AccessTypeR\n" +
+	"accessType\"\xaf\x02\n" +
+	"\rObjectDetails\x12F\n" +
+	"\vobject_type\x18\x01 \x01(\x0e2%.nimbus_public.v1.types.v1.ObjectTypeR\n" +
 	"objectType\x12\x1b\n" +
 	"\tobject_id\x18\x02 \x01(\tR\bobjectId\x12\x1f\n" +
 	"\vobject_size\x18\x03 \x01(\x04R\n" +
-	"objectSize\x12?\n" +
-	"\vaccess_type\x18\x04 \x01(\x0e2\x1e.nimbus.v1.types.v1.AccessTypeR\n" +
+	"objectSize\x12F\n" +
+	"\vaccess_type\x18\x04 \x01(\x0e2%.nimbus_public.v1.types.v1.AccessTypeR\n" +
 	"accessType\x12\x1d\n" +
 	"\n" +
 	"created_on\x18\x05 \x01(\tR\tcreatedOn\x12\"\n" +
@@ -291,34 +291,34 @@ const file_nimbus_v1_types_v1_files_proto_rawDesc = "" +
 	"AccessType\x12\x1b\n" +
 	"\x17ACCESS_TYPE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13ACCESS_TYPE_PRIVATE\x10\x01\x12\x16\n" +
-	"\x12ACCESS_TYPE_PUBLIC\x10\x02B\xa1\x01\n" +
-	"\x16com.nimbus.v1.types.v1B\n" +
-	"FilesProtoP\x01Z\x10proto-gen/client\xa2\x02\x03NVT\xaa\x02\x12Nimbus.V1.Types.V1\xca\x02\x12Nimbus\\V1\\Types\\V1\xe2\x02\x1eNimbus\\V1\\Types\\V1\\GPBMetadata\xea\x02\x15Nimbus::V1::Types::V1b\x06proto3"
+	"\x12ACCESS_TYPE_PUBLIC\x10\x02B\xc0\x01\n" +
+	"\x1dcom.nimbus_public.v1.types.v1B\n" +
+	"FilesProtoP\x01Z\x10proto-gen/public\xa2\x02\x03NVT\xaa\x02\x18NimbusPublic.V1.Types.V1\xca\x02\x18NimbusPublic\\V1\\Types\\V1\xe2\x02$NimbusPublic\\V1\\Types\\V1\\GPBMetadata\xea\x02\x1bNimbusPublic::V1::Types::V1b\x06proto3"
 
 var (
-	file_nimbus_v1_types_v1_files_proto_rawDescOnce sync.Once
-	file_nimbus_v1_types_v1_files_proto_rawDescData []byte
+	file_nimbus_public_v1_types_v1_files_proto_rawDescOnce sync.Once
+	file_nimbus_public_v1_types_v1_files_proto_rawDescData []byte
 )
 
-func file_nimbus_v1_types_v1_files_proto_rawDescGZIP() []byte {
-	file_nimbus_v1_types_v1_files_proto_rawDescOnce.Do(func() {
-		file_nimbus_v1_types_v1_files_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_nimbus_v1_types_v1_files_proto_rawDesc), len(file_nimbus_v1_types_v1_files_proto_rawDesc)))
+func file_nimbus_public_v1_types_v1_files_proto_rawDescGZIP() []byte {
+	file_nimbus_public_v1_types_v1_files_proto_rawDescOnce.Do(func() {
+		file_nimbus_public_v1_types_v1_files_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_nimbus_public_v1_types_v1_files_proto_rawDesc), len(file_nimbus_public_v1_types_v1_files_proto_rawDesc)))
 	})
-	return file_nimbus_v1_types_v1_files_proto_rawDescData
+	return file_nimbus_public_v1_types_v1_files_proto_rawDescData
 }
 
-var file_nimbus_v1_types_v1_files_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_nimbus_v1_types_v1_files_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_nimbus_v1_types_v1_files_proto_goTypes = []any{
-	(ObjectType)(0),          // 0: nimbus.v1.types.v1.ObjectType
-	(AccessType)(0),          // 1: nimbus.v1.types.v1.AccessType
-	(*ObjectAccessInfo)(nil), // 2: nimbus.v1.types.v1.ObjectAccessInfo
-	(*ObjectDetails)(nil),    // 3: nimbus.v1.types.v1.ObjectDetails
+var file_nimbus_public_v1_types_v1_files_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_nimbus_public_v1_types_v1_files_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_nimbus_public_v1_types_v1_files_proto_goTypes = []any{
+	(ObjectType)(0),          // 0: nimbus_public.v1.types.v1.ObjectType
+	(AccessType)(0),          // 1: nimbus_public.v1.types.v1.AccessType
+	(*ObjectAccessInfo)(nil), // 2: nimbus_public.v1.types.v1.ObjectAccessInfo
+	(*ObjectDetails)(nil),    // 3: nimbus_public.v1.types.v1.ObjectDetails
 }
-var file_nimbus_v1_types_v1_files_proto_depIdxs = []int32{
-	1, // 0: nimbus.v1.types.v1.ObjectAccessInfo.access_type:type_name -> nimbus.v1.types.v1.AccessType
-	0, // 1: nimbus.v1.types.v1.ObjectDetails.object_type:type_name -> nimbus.v1.types.v1.ObjectType
-	1, // 2: nimbus.v1.types.v1.ObjectDetails.access_type:type_name -> nimbus.v1.types.v1.AccessType
+var file_nimbus_public_v1_types_v1_files_proto_depIdxs = []int32{
+	1, // 0: nimbus_public.v1.types.v1.ObjectAccessInfo.access_type:type_name -> nimbus_public.v1.types.v1.AccessType
+	0, // 1: nimbus_public.v1.types.v1.ObjectDetails.object_type:type_name -> nimbus_public.v1.types.v1.ObjectType
+	1, // 2: nimbus_public.v1.types.v1.ObjectDetails.access_type:type_name -> nimbus_public.v1.types.v1.AccessType
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -326,28 +326,28 @@ var file_nimbus_v1_types_v1_files_proto_depIdxs = []int32{
 	0, // [0:3] is the sub-list for field type_name
 }
 
-func init() { file_nimbus_v1_types_v1_files_proto_init() }
-func file_nimbus_v1_types_v1_files_proto_init() {
-	if File_nimbus_v1_types_v1_files_proto != nil {
+func init() { file_nimbus_public_v1_types_v1_files_proto_init() }
+func file_nimbus_public_v1_types_v1_files_proto_init() {
+	if File_nimbus_public_v1_types_v1_files_proto != nil {
 		return
 	}
-	file_nimbus_v1_types_v1_files_proto_msgTypes[1].OneofWrappers = []any{}
+	file_nimbus_public_v1_types_v1_files_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_nimbus_v1_types_v1_files_proto_rawDesc), len(file_nimbus_v1_types_v1_files_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_nimbus_public_v1_types_v1_files_proto_rawDesc), len(file_nimbus_public_v1_types_v1_files_proto_rawDesc)),
 			NumEnums:      2,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_nimbus_v1_types_v1_files_proto_goTypes,
-		DependencyIndexes: file_nimbus_v1_types_v1_files_proto_depIdxs,
-		EnumInfos:         file_nimbus_v1_types_v1_files_proto_enumTypes,
-		MessageInfos:      file_nimbus_v1_types_v1_files_proto_msgTypes,
+		GoTypes:           file_nimbus_public_v1_types_v1_files_proto_goTypes,
+		DependencyIndexes: file_nimbus_public_v1_types_v1_files_proto_depIdxs,
+		EnumInfos:         file_nimbus_public_v1_types_v1_files_proto_enumTypes,
+		MessageInfos:      file_nimbus_public_v1_types_v1_files_proto_msgTypes,
 	}.Build()
-	File_nimbus_v1_types_v1_files_proto = out.File
-	file_nimbus_v1_types_v1_files_proto_goTypes = nil
-	file_nimbus_v1_types_v1_files_proto_depIdxs = nil
+	File_nimbus_public_v1_types_v1_files_proto = out.File
+	file_nimbus_public_v1_types_v1_files_proto_goTypes = nil
+	file_nimbus_public_v1_types_v1_files_proto_depIdxs = nil
 }

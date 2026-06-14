@@ -4,8 +4,9 @@ import (
 	"log"
 	"net"
 
-	fileservice "github.com/biswasakashdev/nimbus/services/nimbus-core/file-service"
-	"github.com/biswasakashdev/nimbus/services/nimbus-core/proto-gen/client"
+	grpcHandler "github.com/biswasakashdev/nimbus/services/nimbus-core/internal/handler/grpc"
+	publicpb "github.com/biswasakashdev/nimbus/services/nimbus-core/proto-gen/public"
+
 	"google.golang.org/grpc"
 )
 
@@ -21,12 +22,12 @@ func main() {
 
 	// 3. Initialize your LoadBalancer implementation
 	// This struct will hold the logic for Register and WatchBackends
-
 	grpcServer := grpc.NewServer()
-	fileGrpcServer := fileservice.NewFileGRPCService()
 
-	// 4. Register the service with the gRPC server
-	client.RegisterNimbusServiceServer(grpcServer, fileGrpcServer)
+	nimbuseServiceGrpchandler := grpcHandler.NewNimbusServiceGRPCHandler()
+
+	// 4. Register the services with the gRPC server
+	publicpb.RegisterNimbusPublicServiceServer(grpcServer, nimbuseServiceGrpchandler)
 
 	log.Printf("Nimbus Core started on %v", lis.Addr())
 
