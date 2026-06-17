@@ -5,6 +5,7 @@ import { SidebarNav } from "@/components/home/sidebar-nav.component";
 import { Header } from "@/components/home/header.component";
 import { ContentGrid } from "@/components/home/content-grid";
 import { mockDriveData, FileNode } from "@/types/files.types";
+import { uploadFiles } from "./action";
 
 export const DrivePage: React.FC = () => {
   const [driveData, setDriveData] = useState<FileNode[]>(mockDriveData);
@@ -49,33 +50,22 @@ export const DrivePage: React.FC = () => {
   };
 
   // State Handler tracking local file upload actions
-  const handleFileUpload = (files: FileList) => {
-    const newFiles: FileNode[] = Array.from(files).map((file, idx) => ({
-      id: `uploaded-${Date.now()}-${idx}`,
-      name: file.name,
-      type: "file",
-      mimeType: file.type,
-      size: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
-      updatedAt: new Date().toISOString().split("T")[0],
-    }));
+  const handleFileUpload = async (files: FileList) => {
+    // 1. Package files and target directory location into a FormData container
+    const formData = new FormData();
+    Array.from(files).forEach((file) => {
+      formData.append("files", file); // Your backend will look for the 'files' key
+    });
 
-    if (!currentFolderId) {
-      setDriveData([...driveData, ...newFiles]);
-    } else {
-      const updateTree = (nodes: FileNode[]): FileNode[] => {
-        return nodes.map((node) => {
-          if (node.id === currentFolderId) {
-            return {
-              ...node,
-              children: [...(node.children || []), ...newFiles],
-            };
-          } else if (node.children) {
-            return { ...node, children: updateTree(node.children) };
-          }
-          return node;
-        });
-      };
-      setDriveData(updateTree(driveData));
+    if (currentFolderId) {
+      formData.append("folderId", currentFolderId);
+    }
+
+    try {
+      await uploadFiles(formData);
+      // Update the current list after uploading the files.
+    } catch (err) {
+      console.error(err);
     }
   };
 

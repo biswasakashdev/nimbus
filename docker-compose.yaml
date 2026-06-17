@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:alpine3.24
+    container_name: nimbus_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=password
+  cassandra:
+    image: cassandra:5.0.8-bookworm
+    container_name: nimbus_cassandra

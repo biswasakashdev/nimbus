@@ -1,7 +1,7 @@
 
 
 nimbus-core-gen:
-	buf generate --template services/nimbus-core/generate.yaml
+	buf generate --template services/nimbus-core/buf.gen.yaml
 
-nimbus-manager-gen:
-	buf generate --template services/nimbus-manager/generate.yaml
+web-gen:
+	buf generate --template web/buf.gen.yaml
