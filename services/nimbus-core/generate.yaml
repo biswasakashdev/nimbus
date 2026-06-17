@@ -1,12 +1,6 @@
 version: v2
-managed:
-  enabled: true
-  override:
-    - file_option: go_package
-      value: proto-gen/public
 inputs:
   # Here we provide the proto files directly from github no need to clone at runtime.
-
   - git_repo: https://github.com/biswasakashdev/nimbus-proto.git
     branch: main
     # Directory where all proto files are located.
@@ -14,7 +8,9 @@ inputs:
     # Depth define how many commits need to copy. no need to copy all the previous commits.
     depth: 30
 plugins:
-  - remote: buf.build/protocolbuffers/go
-    out: services/nimbus-core
-  - remote: buf.build/grpc/go:v1.6.2
-    out: services/nimbus-core
+  # community/neoeinstein-tonic depends on community/neoeinstein-prost
+  - remote: buf.build/community/neoeinstein-prost:v0.5.0
+    out: services/nimbus-core/src/proto-gen
+
+  - remote: buf.build/community/neoeinstein-tonic:v0.5.0
+    out: services/nimbus-core/src/proto-gen
