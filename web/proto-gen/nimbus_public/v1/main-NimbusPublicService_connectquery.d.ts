@@ -28,3 +28,15 @@ export const getDirectoryContent: typeof NimbusPublicService["method"]["getDirec
  * @generated from rpc nimbus_public.v1.NimbusPublicService.FindObjectById
  */
 export const findObjectById: typeof NimbusPublicService["method"]["findObjectById"];
+/**
+ * Update the move, replace if file already exist.
+ *
+ * @generated from rpc nimbus_public.v1.NimbusPublicService.RenameFile
+ */
+export const renameFile: typeof NimbusPublicService["method"]["renameFile"];
+/**
+ * Copy the file to another location.
+ *
+ * @generated from rpc nimbus_public.v1.NimbusPublicService.CopyFile
+ */
+export const copyFile: typeof NimbusPublicService["method"]["copyFile"];

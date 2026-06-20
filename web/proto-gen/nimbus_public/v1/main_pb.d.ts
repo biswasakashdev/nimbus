@@ -11,78 +11,6 @@ import type { Message } from "@bufbuild/protobuf";
 export declare const file_nimbus_public_v1_main: GenFile;
 
 /**
- * The authorization sent over the header to access the Objects.
- *
- * @generated from message nimbus_public.v1.Authorization
- */
-export declare type Authorization = Message<"nimbus_public.v1.Authorization"> & {
-  /**
-   * @generated from field: string token = 1;
-   */
-  token: string;
-};
-
-/**
- * Describes the message nimbus_public.v1.Authorization.
- * Use `create(AuthorizationSchema)` to create a new message.
- */
-export declare const AuthorizationSchema: GenMessage<Authorization>;
-
-/**
- * @generated from message nimbus_public.v1.ObjectMetaInfo
- */
-export declare type ObjectMetaInfo = Message<"nimbus_public.v1.ObjectMetaInfo"> & {
-  /**
-   * @generated from field: string object_id = 1;
-   */
-  objectId: string;
-
-  /**
-   * @generated from field: nimbus_public.v1.AccessType access_type = 2;
-   */
-  accessType: AccessType;
-
-  /**
-   * @generated from field: nimbus_public.v1.ObjectType object_type = 3;
-   */
-  objectType: ObjectType;
-
-  /**
-   * @generated from field: map<string, string> meta_data = 4;
-   */
-  metaData: { [key: string]: string };
-};
-
-/**
- * Describes the message nimbus_public.v1.ObjectMetaInfo.
- * Use `create(ObjectMetaInfoSchema)` to create a new message.
- */
-export declare const ObjectMetaInfoSchema: GenMessage<ObjectMetaInfo>;
-
-/**
- * The access information of an object it can be used via public url or only access using personal access token.
- *
- * @generated from message nimbus_public.v1.ObjectAccessInfo
- */
-export declare type ObjectAccessInfo = Message<"nimbus_public.v1.ObjectAccessInfo"> & {
-  /**
-   * @generated from field: string object_id = 1;
-   */
-  objectId: string;
-
-  /**
-   * @generated from field: nimbus_public.v1.AccessType access_type = 2;
-   */
-  accessType: AccessType;
-};
-
-/**
- * Describes the message nimbus_public.v1.ObjectAccessInfo.
- * Use `create(ObjectAccessInfoSchema)` to create a new message.
- */
-export declare const ObjectAccessInfoSchema: GenMessage<ObjectAccessInfo>;
-
-/**
  * The details of any object it can be file or a directory and the access url if the object is public otherwise it can be only access via personal access token.
  *
  * @generated from message nimbus_public.v1.ObjectDetails
@@ -114,16 +42,16 @@ export declare type ObjectDetails = Message<"nimbus_public.v1.ObjectDetails"> & 
   createdOn: string;
 
   /**
-   * @generated from field: map<string, string> meta_data = 6;
-   */
-  metaData: { [key: string]: string };
-
-  /**
    * image/jpeg, image/png, text/plain
    *
-   * @generated from field: optional string content_type = 7;
+   * @generated from field: string content_type = 6;
    */
-  contentType?: string;
+  contentType: string;
+
+  /**
+   * @generated from field: map<string, string> meta_data = 7;
+   */
+  metaData: { [key: string]: string };
 
   /**
    * The access url of a directory is referd as static directory which serve static contents.
@@ -194,8 +122,6 @@ export declare type GetObjectRequest = Message<"nimbus_public.v1.GetObjectReques
 export declare const GetObjectRequestSchema: GenMessage<GetObjectRequest>;
 
 /**
- * The stream of bytes of the file.
- *
  * @generated from message nimbus_public.v1.GetObjectResponse
  */
 export declare type GetObjectResponse = Message<"nimbus_public.v1.GetObjectResponse"> & {
@@ -212,6 +138,8 @@ export declare type GetObjectResponse = Message<"nimbus_public.v1.GetObjectRespo
 export declare const GetObjectResponseSchema: GenMessage<GetObjectResponse>;
 
 /**
+ * Delete objects
+ *
  * @generated from message nimbus_public.v1.DeleteObjectRequest
  */
 export declare type DeleteObjectRequest = Message<"nimbus_public.v1.DeleteObjectRequest"> & {
@@ -244,13 +172,20 @@ export declare type DeleteObjectResponse = Message<"nimbus_public.v1.DeleteObjec
 export declare const DeleteObjectResponseSchema: GenMessage<DeleteObjectResponse>;
 
 /**
+ * Update access type
+ *
  * @generated from message nimbus_public.v1.UpdateAccessTypeRequest
  */
 export declare type UpdateAccessTypeRequest = Message<"nimbus_public.v1.UpdateAccessTypeRequest"> & {
   /**
-   * @generated from field: repeated nimbus_public.v1.ObjectAccessInfo object_access_info = 1;
+   * @generated from field: repeated string object_ids = 1;
    */
-  objectAccessInfo: ObjectAccessInfo[];
+  objectIds: string[];
+
+  /**
+   * @generated from field: nimbus_public.v1.AccessType access_type = 2;
+   */
+  accessType: AccessType;
 };
 
 /**
@@ -264,9 +199,9 @@ export declare const UpdateAccessTypeRequestSchema: GenMessage<UpdateAccessTypeR
  */
 export declare type UpdateAccessTypeResponse = Message<"nimbus_public.v1.UpdateAccessTypeResponse"> & {
   /**
-   * @generated from field: repeated nimbus_public.v1.ObjectAccessInfo object_access_info = 1;
+   * @generated from field: repeated nimbus_public.v1.UpdateAccessTypeResponse.ObjectAccessInfo object_access_info = 1;
    */
-  objectAccessInfo: ObjectAccessInfo[];
+  objectAccessInfo: UpdateAccessTypeResponse_ObjectAccessInfo[];
 };
 
 /**
@@ -276,13 +211,45 @@ export declare type UpdateAccessTypeResponse = Message<"nimbus_public.v1.UpdateA
 export declare const UpdateAccessTypeResponseSchema: GenMessage<UpdateAccessTypeResponse>;
 
 /**
- * @generated from message nimbus_public.v1.GetDirectoryContentRequest
+ * The access information of an object it can be used via public url or only access using personal access token.
+ *
+ * @generated from message nimbus_public.v1.UpdateAccessTypeResponse.ObjectAccessInfo
  */
-export declare type GetDirectoryContentRequest = Message<"nimbus_public.v1.GetDirectoryContentRequest"> & {
+export declare type UpdateAccessTypeResponse_ObjectAccessInfo = Message<"nimbus_public.v1.UpdateAccessTypeResponse.ObjectAccessInfo"> & {
   /**
    * @generated from field: string object_id = 1;
    */
   objectId: string;
+
+  /**
+   * @generated from field: nimbus_public.v1.AccessType access_type = 2;
+   */
+  accessType: AccessType;
+
+  /**
+   * @generated from field: optional string access_url = 3;
+   */
+  accessUrl?: string;
+};
+
+/**
+ * Describes the message nimbus_public.v1.UpdateAccessTypeResponse.ObjectAccessInfo.
+ * Use `create(UpdateAccessTypeResponse_ObjectAccessInfoSchema)` to create a new message.
+ */
+export declare const UpdateAccessTypeResponse_ObjectAccessInfoSchema: GenMessage<UpdateAccessTypeResponse_ObjectAccessInfo>;
+
+/**
+ * Get directory content.
+ *
+ * @generated from message nimbus_public.v1.GetDirectoryContentRequest
+ */
+export declare type GetDirectoryContentRequest = Message<"nimbus_public.v1.GetDirectoryContentRequest"> & {
+  /**
+   * If no directory given returns the root system.
+   *
+   * @generated from field: optional string object_id = 1;
+   */
+  objectId?: string;
 
   /**
    * @generated from field: string off_set = 2;
@@ -359,6 +326,8 @@ export declare type GetDirectoryContentResponse_ObjectInfo = Message<"nimbus_pub
 export declare const GetDirectoryContentResponse_ObjectInfoSchema: GenMessage<GetDirectoryContentResponse_ObjectInfo>;
 
 /**
+ * Find object by id
+ *
  * @generated from message nimbus_public.v1.FindObjectByIdRequest
  */
 export declare type FindObjectByIdRequest = Message<"nimbus_public.v1.FindObjectByIdRequest"> & {
@@ -389,6 +358,85 @@ export declare type FindObjectByIdResponse = Message<"nimbus_public.v1.FindObjec
  * Use `create(FindObjectByIdResponseSchema)` to create a new message.
  */
 export declare const FindObjectByIdResponseSchema: GenMessage<FindObjectByIdResponse>;
+
+/**
+ * RenameFile 
+ *
+ * @generated from message nimbus_public.v1.RenameFileRequest
+ */
+export declare type RenameFileRequest = Message<"nimbus_public.v1.RenameFileRequest"> & {
+  /**
+   * @generated from field: repeated string object_ids = 1;
+   */
+  objectIds: string[];
+
+  /**
+   * @generated from field: optional string destination = 2;
+   */
+  destination?: string;
+};
+
+/**
+ * Describes the message nimbus_public.v1.RenameFileRequest.
+ * Use `create(RenameFileRequestSchema)` to create a new message.
+ */
+export declare const RenameFileRequestSchema: GenMessage<RenameFileRequest>;
+
+/**
+ * @generated from message nimbus_public.v1.RenameFileResponse
+ */
+export declare type RenameFileResponse = Message<"nimbus_public.v1.RenameFileResponse"> & {
+  /**
+   * @generated from field: repeated string object_ids = 1;
+   */
+  objectIds: string[];
+};
+
+/**
+ * Describes the message nimbus_public.v1.RenameFileResponse.
+ * Use `create(RenameFileResponseSchema)` to create a new message.
+ */
+export declare const RenameFileResponseSchema: GenMessage<RenameFileResponse>;
+
+/**
+ * Copy files
+ *
+ *
+ * @generated from message nimbus_public.v1.CopyFileRequest
+ */
+export declare type CopyFileRequest = Message<"nimbus_public.v1.CopyFileRequest"> & {
+  /**
+   * @generated from field: repeated string object_ids = 1;
+   */
+  objectIds: string[];
+
+  /**
+   * @generated from field: optional string destination = 2;
+   */
+  destination?: string;
+};
+
+/**
+ * Describes the message nimbus_public.v1.CopyFileRequest.
+ * Use `create(CopyFileRequestSchema)` to create a new message.
+ */
+export declare const CopyFileRequestSchema: GenMessage<CopyFileRequest>;
+
+/**
+ * @generated from message nimbus_public.v1.CopyFileResponse
+ */
+export declare type CopyFileResponse = Message<"nimbus_public.v1.CopyFileResponse"> & {
+  /**
+   * @generated from field: repeated string object_ids = 1;
+   */
+  objectIds: string[];
+};
+
+/**
+ * Describes the message nimbus_public.v1.CopyFileResponse.
+ * Use `create(CopyFileResponseSchema)` to create a new message.
+ */
+export declare const CopyFileResponseSchema: GenMessage<CopyFileResponse>;
 
 /**
  * Either a file or a directory.
@@ -507,6 +555,26 @@ export declare const NimbusPublicService: GenService<{
     methodKind: "unary";
     input: typeof FindObjectByIdRequestSchema;
     output: typeof FindObjectByIdResponseSchema;
+  },
+  /**
+   * Update the move, replace if file already exist.
+   *
+   * @generated from rpc nimbus_public.v1.NimbusPublicService.RenameFile
+   */
+  renameFile: {
+    methodKind: "unary";
+    input: typeof RenameFileRequestSchema;
+    output: typeof RenameFileResponseSchema;
+  },
+  /**
+   * Copy the file to another location.
+   *
+   * @generated from rpc nimbus_public.v1.NimbusPublicService.CopyFile
+   */
+  copyFile: {
+    methodKind: "unary";
+    input: typeof CopyFileRequestSchema;
+    output: typeof CopyFileResponseSchema;
   },
 }>;
 

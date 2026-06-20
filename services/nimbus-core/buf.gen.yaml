@@ -10,7 +10,7 @@ inputs:
 plugins:
   # community/neoeinstein-tonic depends on community/neoeinstein-prost
   - remote: buf.build/community/neoeinstein-prost:v0.5.0
-    out: services/nimbus-core/src/proto-gen
+    out: services/nimbus-core/proto-gen
 
   - remote: buf.build/community/neoeinstein-tonic:v0.5.0
-    out: services/nimbus-core/src/proto-gen
+    out: services/nimbus-core/proto-gen

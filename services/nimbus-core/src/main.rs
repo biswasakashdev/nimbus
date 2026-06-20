@@ -14,7 +14,7 @@ use crate::local_storage::LocalStorageCluster;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let addr = "[::1]:50052".parse()?;
-    let storage = NimbusCoreService::new(LocalStorageCluster::default());
+    let storage = NimbusCoreService::new(LocalStorageCluster::new());
 
     println!("gRPC Server listening on {}", addr);
 

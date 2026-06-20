@@ -1,18 +1,19 @@
 use nimbus_proto::{
-    DeleteObjectRequest, DeleteObjectResponse, FindObjectByIdRequest, FindObjectByIdResponse,
-    GetDirectoryContentRequest, GetDirectoryContentResponse, GetObjectRequest, GetObjectResponse,
-    PutObjectRequest, PutObjectResponse, UpdateAccessTypeRequest, UpdateAccessTypeResponse,
-    nimbus_public_service_server::NimbusPublicService,
+    CopyFileRequest, CopyFileResponse, DeleteObjectRequest, DeleteObjectResponse,
+    FindObjectByIdRequest, FindObjectByIdResponse, GetDirectoryContentRequest,
+    GetDirectoryContentResponse, GetObjectRequest, GetObjectResponse, PutObjectRequest,
+    PutObjectResponse, RenameFileRequest, RenameFileResponse, UpdateAccessTypeRequest,
+    UpdateAccessTypeResponse, nimbus_public_service_server::NimbusPublicService,
 };
 use std::{pin::Pin, result::Result};
 use tokio::sync::mpsc;
 use tokio_stream::{Stream, wrappers::ReceiverStream};
 use tonic::{Request, Response, Status, Streaming};
 
-use crate::storage::Storage;
+use crate::storage::{NimbusObject, Storage};
 
 pub mod nimbus_proto {
-    include!("../proto-gen/nimbus_public/v1/nimbus_public.v1.rs");
+    include!("../../proto-gen/nimbus_public/v1/nimbus_public.v1.rs");
 }
 
 #[derive(Default, Debug)]
@@ -22,7 +23,7 @@ pub struct NimbusCoreService<T> {
 
 impl<T: Storage> NimbusCoreService<T> {
     pub fn new(sn: T) -> NimbusCoreService<T> {
-        NimbusCoreService { storage: sn }
+        Self { storage: sn }
     }
 }
 
@@ -39,18 +40,13 @@ where
         &self,
         request: Request<Streaming<PutObjectRequest>>,
     ) -> Result<Response<PutObjectResponse>, Status> {
-        let object_id = &request
-            .metadata()
-            .get("object_id")
-            .and_then(|v| v.to_str().ok())
-            .unwrap()
-            .to_string();
+        let nimbus_obj: NimbusObject = self.storage.save(request).await?;
 
-        println!("{}", object_id);
-        let stream = request.into_inner();
+        let nimbus_object_details = nimbus_obj.to_object_details();
 
-        let data = self.storage.save(stream, &object_id).await?;
-        Ok(Response::new(data))
+        Ok(Response::new(PutObjectResponse {
+            object_details: Some(nimbus_object_details),
+        }))
     }
 
     async fn get_object(
@@ -113,5 +109,18 @@ where
     ) -> Result<Response<FindObjectByIdResponse>, tonic::Status> {
         let data = FindObjectByIdResponse::default();
         Ok(Response::from(data))
+    }
+
+    async fn rename_file(
+        &self,
+        request: Request<RenameFileRequest>,
+    ) -> Result<Response<RenameFileResponse>, Status> {
+        Ok(Response::new(RenameFileResponse::default()))
+    }
+    async fn copy_file(
+        &self,
+        request: Request<CopyFileRequest>,
+    ) -> Result<Response<CopyFileResponse>, Status> {
+        Ok(Response::new(CopyFileResponse::default()))
     }
 }

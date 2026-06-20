@@ -10,7 +10,6 @@ pub mod nimbus_public_service_client {
     )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
-    ///
     #[derive(Debug, Clone)]
     pub struct NimbusPublicServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -91,8 +90,6 @@ pub mod nimbus_public_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        /** Upload the bytes.
-*/
         pub async fn put_object(
             &mut self,
             request: impl tonic::IntoStreamingRequest<Message = super::PutObjectRequest>,
@@ -119,8 +116,6 @@ pub mod nimbus_public_service_client {
                 );
             self.inner.client_streaming(req, path, codec).await
         }
-        /** Read the bytes from the data.
-*/
         pub async fn get_object(
             &mut self,
             request: impl tonic::IntoRequest<super::GetObjectRequest>,
@@ -147,8 +142,6 @@ pub mod nimbus_public_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
-        /** Delete an object.
-*/
         pub async fn delete_object(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteObjectRequest>,
@@ -178,8 +171,6 @@ pub mod nimbus_public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /** Update the access type of the object PUBLIC/PRIVATE.
-*/
         pub async fn update_access_type(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateAccessTypeRequest>,
@@ -209,8 +200,6 @@ pub mod nimbus_public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /** If a valid directory found then returns it objects.
-*/
         pub async fn get_directory_content(
             &mut self,
             request: impl tonic::IntoRequest<super::GetDirectoryContentRequest>,
@@ -269,6 +258,58 @@ pub mod nimbus_public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn rename_file(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RenameFileRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RenameFileResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic_prost::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/nimbus_public.v1.NimbusPublicService/RenameFile",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("nimbus_public.v1.NimbusPublicService", "RenameFile"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn copy_file(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CopyFileRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CopyFileResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic_prost::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/nimbus_public.v1.NimbusPublicService/CopyFile",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("nimbus_public.v1.NimbusPublicService", "CopyFile"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -284,8 +325,6 @@ pub mod nimbus_public_service_server {
     /// Generated trait containing gRPC methods that should be implemented for use with NimbusPublicServiceServer.
     #[async_trait]
     pub trait NimbusPublicService: std::marker::Send + std::marker::Sync + 'static {
-        /** Upload the bytes.
-*/
         async fn put_object(
             &self,
             request: tonic::Request<tonic::Streaming<super::PutObjectRequest>>,
@@ -299,14 +338,10 @@ pub mod nimbus_public_service_server {
             >
             + std::marker::Send
             + 'static;
-        /** Read the bytes from the data.
-*/
         async fn get_object(
             &self,
             request: tonic::Request<super::GetObjectRequest>,
         ) -> std::result::Result<tonic::Response<Self::GetObjectStream>, tonic::Status>;
-        /** Delete an object.
-*/
         async fn delete_object(
             &self,
             request: tonic::Request<super::DeleteObjectRequest>,
@@ -314,8 +349,6 @@ pub mod nimbus_public_service_server {
             tonic::Response<super::DeleteObjectResponse>,
             tonic::Status,
         >;
-        /** Update the access type of the object PUBLIC/PRIVATE.
-*/
         async fn update_access_type(
             &self,
             request: tonic::Request<super::UpdateAccessTypeRequest>,
@@ -323,8 +356,6 @@ pub mod nimbus_public_service_server {
             tonic::Response<super::UpdateAccessTypeResponse>,
             tonic::Status,
         >;
-        /** If a valid directory found then returns it objects.
-*/
         async fn get_directory_content(
             &self,
             request: tonic::Request<super::GetDirectoryContentRequest>,
@@ -339,8 +370,21 @@ pub mod nimbus_public_service_server {
             tonic::Response<super::FindObjectByIdResponse>,
             tonic::Status,
         >;
+        async fn rename_file(
+            &self,
+            request: tonic::Request<super::RenameFileRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RenameFileResponse>,
+            tonic::Status,
+        >;
+        async fn copy_file(
+            &self,
+            request: tonic::Request<super::CopyFileRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CopyFileResponse>,
+            tonic::Status,
+        >;
     }
-    ///
     #[derive(Debug)]
     pub struct NimbusPublicServiceServer<T> {
         inner: Arc<T>,
@@ -690,6 +734,97 @@ pub mod nimbus_public_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = FindObjectByIdSvc(inner);
+                        let codec = tonic_prost::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/nimbus_public.v1.NimbusPublicService/RenameFile" => {
+                    #[allow(non_camel_case_types)]
+                    struct RenameFileSvc<T: NimbusPublicService>(pub Arc<T>);
+                    impl<
+                        T: NimbusPublicService,
+                    > tonic::server::UnaryService<super::RenameFileRequest>
+                    for RenameFileSvc<T> {
+                        type Response = super::RenameFileResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::RenameFileRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as NimbusPublicService>::rename_file(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = RenameFileSvc(inner);
+                        let codec = tonic_prost::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/nimbus_public.v1.NimbusPublicService/CopyFile" => {
+                    #[allow(non_camel_case_types)]
+                    struct CopyFileSvc<T: NimbusPublicService>(pub Arc<T>);
+                    impl<
+                        T: NimbusPublicService,
+                    > tonic::server::UnaryService<super::CopyFileRequest>
+                    for CopyFileSvc<T> {
+                        type Response = super::CopyFileResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CopyFileRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as NimbusPublicService>::copy_file(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CopyFileSvc(inner);
                         let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

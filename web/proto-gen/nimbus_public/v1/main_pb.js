@@ -8,126 +8,140 @@ import { enumDesc, fileDesc, messageDesc, serviceDesc, tsEnum } from "@bufbuild/
  * Describes the file nimbus_public/v1/main.proto.
  */
 export const file_nimbus_public_v1_main = /*@__PURE__*/
-  fileDesc("ChtuaW1idXNfcHVibGljL3YxL21haW4ucHJvdG8SEG5pbWJ1c19wdWJsaWMudjEiHgoNQXV0aG9yaXphdGlvbhINCgV0b2tlbhgBIAEoCSL9AQoOT2JqZWN0TWV0YUluZm8SEQoJb2JqZWN0X2lkGAEgASgJEjEKC2FjY2Vzc190eXBlGAIgASgOMhwubmltYnVzX3B1YmxpYy52MS5BY2Nlc3NUeXBlEjEKC29iamVjdF90eXBlGAMgASgOMhwubmltYnVzX3B1YmxpYy52MS5PYmplY3RUeXBlEkEKCW1ldGFfZGF0YRgEIAMoCzIuLm5pbWJ1c19wdWJsaWMudjEuT2JqZWN0TWV0YUluZm8uTWV0YURhdGFFbnRyeRovCg1NZXRhRGF0YUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEiWAoQT2JqZWN0QWNjZXNzSW5mbxIRCglvYmplY3RfaWQYASABKAkSMQoLYWNjZXNzX3R5cGUYAiABKA4yHC5uaW1idXNfcHVibGljLnYxLkFjY2Vzc1R5cGUi+AIKDU9iamVjdERldGFpbHMSMQoLb2JqZWN0X3R5cGUYASABKA4yHC5uaW1idXNfcHVibGljLnYxLk9iamVjdFR5cGUSEQoJb2JqZWN0X2lkGAIgASgJEhMKC29iamVjdF9zaXplGAMgASgEEjEKC2FjY2Vzc190eXBlGAQgASgOMhwubmltYnVzX3B1YmxpYy52MS5BY2Nlc3NUeXBlEhIKCmNyZWF0ZWRfb24YBSABKAkSQAoJbWV0YV9kYXRhGAYgAygLMi0ubmltYnVzX3B1YmxpYy52MS5PYmplY3REZXRhaWxzLk1ldGFEYXRhRW50cnkSGQoMY29udGVudF90eXBlGAcgASgJSACIAQESFwoKYWNjZXNzX3VybBgIIAEoCUgBiAEBGi8KDU1ldGFEYXRhRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4AUIPCg1fY29udGVudF90eXBlQg0KC19hY2Nlc3NfdXJsIiAKEFB1dE9iamVjdFJlcXVlc3QSDAoEZGF0YRgBIAEoDCJMChFQdXRPYmplY3RSZXNwb25zZRI3Cg5vYmplY3RfZGV0YWlscxgBIAEoCzIfLm5pbWJ1c19wdWJsaWMudjEuT2JqZWN0RGV0YWlscyIlChBHZXRPYmplY3RSZXF1ZXN0EhEKCW9iamVjdF9pZBgBIAEoCSIhChFHZXRPYmplY3RSZXNwb25zZRIMCgRkYXRhGAEgASgMIikKE0RlbGV0ZU9iamVjdFJlcXVlc3QSEgoKb2JqZWN0X2lkcxgBIAMoCSIqChREZWxldGVPYmplY3RSZXNwb25zZRISCgpvYmplY3RfaWRzGAEgAygJIlkKF1VwZGF0ZUFjY2Vzc1R5cGVSZXF1ZXN0Ej4KEm9iamVjdF9hY2Nlc3NfaW5mbxgBIAMoCzIiLm5pbWJ1c19wdWJsaWMudjEuT2JqZWN0QWNjZXNzSW5mbyJaChhVcGRhdGVBY2Nlc3NUeXBlUmVzcG9uc2USPgoSb2JqZWN0X2FjY2Vzc19pbmZvGAEgAygLMiIubmltYnVzX3B1YmxpYy52MS5PYmplY3RBY2Nlc3NJbmZvIk8KGkdldERpcmVjdG9yeUNvbnRlbnRSZXF1ZXN0EhEKCW9iamVjdF9pZBgBIAEoCRIPCgdvZmZfc2V0GAIgASgJEg0KBWNvdW50GAMgASgJIrACChtHZXREaXJlY3RvcnlDb250ZW50UmVzcG9uc2USFAoMb2JqZWN0X2NvdW50GAEgASgEEkkKB29iamVjdHMYBCADKAsyOC5uaW1idXNfcHVibGljLnYxLkdldERpcmVjdG9yeUNvbnRlbnRSZXNwb25zZS5PYmplY3RJbmZvGq8BCgpPYmplY3RJbmZvEhEKCW9iamVjdF9pZBgBIAEoCRIxCgthY2Nlc3NfdHlwZRgCIAEoDjIcLm5pbWJ1c19wdWJsaWMudjEuQWNjZXNzVHlwZRIxCgtvYmplY3RfdHlwZRgDIAEoDjIcLm5pbWJ1c19wdWJsaWMudjEuT2JqZWN0VHlwZRIUCgxjb250ZW50X3R5cGUYBCABKAkSEgoKY3JlYXRlZF9vbhgFIAEoCSIqChVGaW5kT2JqZWN0QnlJZFJlcXVlc3QSEQoJb2JqZWN0X2lkGAEgASgJIkkKFkZpbmRPYmplY3RCeUlkUmVzcG9uc2USLwoGb2JqZWN0GAEgASgLMh8ubmltYnVzX3B1YmxpYy52MS5PYmplY3REZXRhaWxzKloKCk9iamVjdFR5cGUSGwoXT0JKRUNUX1RZUEVfVU5TUEVDSUZJRUQQABIUChBPQkpFQ1RfVFlQRV9GSUxFEAESGQoVT0JKRUNUX1RZUEVfRElSRUNUT1JZEAIqWgoKQWNjZXNzVHlwZRIbChdBQ0NFU1NfVFlQRV9VTlNQRUNJRklFRBAAEhcKE0FDQ0VTU19UWVBFX1BSSVZBVEUQARIWChJBQ0NFU1NfVFlQRV9QVUJMSUMQAjLoBAoTTmltYnVzUHVibGljU2VydmljZRJWCglQdXRPYmplY3QSIi5uaW1idXNfcHVibGljLnYxLlB1dE9iamVjdFJlcXVlc3QaIy5uaW1idXNfcHVibGljLnYxLlB1dE9iamVjdFJlc3BvbnNlKAESVgoJR2V0T2JqZWN0EiIubmltYnVzX3B1YmxpYy52MS5HZXRPYmplY3RSZXF1ZXN0GiMubmltYnVzX3B1YmxpYy52MS5HZXRPYmplY3RSZXNwb25zZTABEl0KDERlbGV0ZU9iamVjdBIlLm5pbWJ1c19wdWJsaWMudjEuRGVsZXRlT2JqZWN0UmVxdWVzdBomLm5pbWJ1c19wdWJsaWMudjEuRGVsZXRlT2JqZWN0UmVzcG9uc2USaQoQVXBkYXRlQWNjZXNzVHlwZRIpLm5pbWJ1c19wdWJsaWMudjEuVXBkYXRlQWNjZXNzVHlwZVJlcXVlc3QaKi5uaW1idXNfcHVibGljLnYxLlVwZGF0ZUFjY2Vzc1R5cGVSZXNwb25zZRJyChNHZXREaXJlY3RvcnlDb250ZW50EiwubmltYnVzX3B1YmxpYy52MS5HZXREaXJlY3RvcnlDb250ZW50UmVxdWVzdBotLm5pbWJ1c19wdWJsaWMudjEuR2V0RGlyZWN0b3J5Q29udGVudFJlc3BvbnNlEmMKDkZpbmRPYmplY3RCeUlkEicubmltYnVzX3B1YmxpYy52MS5GaW5kT2JqZWN0QnlJZFJlcXVlc3QaKC5uaW1idXNfcHVibGljLnYxLkZpbmRPYmplY3RCeUlkUmVzcG9uc2ViBnByb3RvMw");
-
-/**
- * Describes the message nimbus_public.v1.Authorization.
- * Use `create(AuthorizationSchema)` to create a new message.
- */
-export const AuthorizationSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 0);
-
-/**
- * Describes the message nimbus_public.v1.ObjectMetaInfo.
- * Use `create(ObjectMetaInfoSchema)` to create a new message.
- */
-export const ObjectMetaInfoSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 1);
-
-/**
- * Describes the message nimbus_public.v1.ObjectAccessInfo.
- * Use `create(ObjectAccessInfoSchema)` to create a new message.
- */
-export const ObjectAccessInfoSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 2);
+  fileDesc("ChtuaW1idXNfcHVibGljL3YxL21haW4ucHJvdG8SEG5pbWJ1c19wdWJsaWMudjEi4gIKDU9iamVjdERldGFpbHMSMQoLb2JqZWN0X3R5cGUYASABKA4yHC5uaW1idXNfcHVibGljLnYxLk9iamVjdFR5cGUSEQoJb2JqZWN0X2lkGAIgASgJEhMKC29iamVjdF9zaXplGAMgASgEEjEKC2FjY2Vzc190eXBlGAQgASgOMhwubmltYnVzX3B1YmxpYy52MS5BY2Nlc3NUeXBlEhIKCmNyZWF0ZWRfb24YBSABKAkSFAoMY29udGVudF90eXBlGAYgASgJEkAKCW1ldGFfZGF0YRgHIAMoCzItLm5pbWJ1c19wdWJsaWMudjEuT2JqZWN0RGV0YWlscy5NZXRhRGF0YUVudHJ5EhcKCmFjY2Vzc191cmwYCCABKAlIAIgBARovCg1NZXRhRGF0YUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCDQoLX2FjY2Vzc191cmwiIAoQUHV0T2JqZWN0UmVxdWVzdBIMCgRkYXRhGAEgASgMIkwKEVB1dE9iamVjdFJlc3BvbnNlEjcKDm9iamVjdF9kZXRhaWxzGAEgASgLMh8ubmltYnVzX3B1YmxpYy52MS5PYmplY3REZXRhaWxzIiUKEEdldE9iamVjdFJlcXVlc3QSEQoJb2JqZWN0X2lkGAEgASgJIiEKEUdldE9iamVjdFJlc3BvbnNlEgwKBGRhdGEYASABKAwiKQoTRGVsZXRlT2JqZWN0UmVxdWVzdBISCgpvYmplY3RfaWRzGAEgAygJIioKFERlbGV0ZU9iamVjdFJlc3BvbnNlEhIKCm9iamVjdF9pZHMYASADKAkiYAoXVXBkYXRlQWNjZXNzVHlwZVJlcXVlc3QSEgoKb2JqZWN0X2lkcxgBIAMoCRIxCgthY2Nlc3NfdHlwZRgCIAEoDjIcLm5pbWJ1c19wdWJsaWMudjEuQWNjZXNzVHlwZSL2AQoYVXBkYXRlQWNjZXNzVHlwZVJlc3BvbnNlElcKEm9iamVjdF9hY2Nlc3NfaW5mbxgBIAMoCzI7Lm5pbWJ1c19wdWJsaWMudjEuVXBkYXRlQWNjZXNzVHlwZVJlc3BvbnNlLk9iamVjdEFjY2Vzc0luZm8agAEKEE9iamVjdEFjY2Vzc0luZm8SEQoJb2JqZWN0X2lkGAEgASgJEjEKC2FjY2Vzc190eXBlGAIgASgOMhwubmltYnVzX3B1YmxpYy52MS5BY2Nlc3NUeXBlEhcKCmFjY2Vzc191cmwYAyABKAlIAIgBAUINCgtfYWNjZXNzX3VybCJiChpHZXREaXJlY3RvcnlDb250ZW50UmVxdWVzdBIWCglvYmplY3RfaWQYASABKAlIAIgBARIPCgdvZmZfc2V0GAIgASgJEg0KBWNvdW50GAMgASgJQgwKCl9vYmplY3RfaWQisAIKG0dldERpcmVjdG9yeUNvbnRlbnRSZXNwb25zZRIUCgxvYmplY3RfY291bnQYASABKAQSSQoHb2JqZWN0cxgEIAMoCzI4Lm5pbWJ1c19wdWJsaWMudjEuR2V0RGlyZWN0b3J5Q29udGVudFJlc3BvbnNlLk9iamVjdEluZm8arwEKCk9iamVjdEluZm8SEQoJb2JqZWN0X2lkGAEgASgJEjEKC2FjY2Vzc190eXBlGAIgASgOMhwubmltYnVzX3B1YmxpYy52MS5BY2Nlc3NUeXBlEjEKC29iamVjdF90eXBlGAMgASgOMhwubmltYnVzX3B1YmxpYy52MS5PYmplY3RUeXBlEhQKDGNvbnRlbnRfdHlwZRgEIAEoCRISCgpjcmVhdGVkX29uGAUgASgJIioKFUZpbmRPYmplY3RCeUlkUmVxdWVzdBIRCglvYmplY3RfaWQYASABKAkiSQoWRmluZE9iamVjdEJ5SWRSZXNwb25zZRIvCgZvYmplY3QYASABKAsyHy5uaW1idXNfcHVibGljLnYxLk9iamVjdERldGFpbHMiUQoRUmVuYW1lRmlsZVJlcXVlc3QSEgoKb2JqZWN0X2lkcxgBIAMoCRIYCgtkZXN0aW5hdGlvbhgCIAEoCUgAiAEBQg4KDF9kZXN0aW5hdGlvbiIoChJSZW5hbWVGaWxlUmVzcG9uc2USEgoKb2JqZWN0X2lkcxgBIAMoCSJPCg9Db3B5RmlsZVJlcXVlc3QSEgoKb2JqZWN0X2lkcxgBIAMoCRIYCgtkZXN0aW5hdGlvbhgCIAEoCUgAiAEBQg4KDF9kZXN0aW5hdGlvbiImChBDb3B5RmlsZVJlc3BvbnNlEhIKCm9iamVjdF9pZHMYASADKAkqWgoKT2JqZWN0VHlwZRIbChdPQkpFQ1RfVFlQRV9VTlNQRUNJRklFRBAAEhQKEE9CSkVDVF9UWVBFX0ZJTEUQARIZChVPQkpFQ1RfVFlQRV9ESVJFQ1RPUlkQAipaCgpBY2Nlc3NUeXBlEhsKF0FDQ0VTU19UWVBFX1VOU1BFQ0lGSUVEEAASFwoTQUNDRVNTX1RZUEVfUFJJVkFURRABEhYKEkFDQ0VTU19UWVBFX1BVQkxJQxACMpQGChNOaW1idXNQdWJsaWNTZXJ2aWNlElYKCVB1dE9iamVjdBIiLm5pbWJ1c19wdWJsaWMudjEuUHV0T2JqZWN0UmVxdWVzdBojLm5pbWJ1c19wdWJsaWMudjEuUHV0T2JqZWN0UmVzcG9uc2UoARJWCglHZXRPYmplY3QSIi5uaW1idXNfcHVibGljLnYxLkdldE9iamVjdFJlcXVlc3QaIy5uaW1idXNfcHVibGljLnYxLkdldE9iamVjdFJlc3BvbnNlMAESXQoMRGVsZXRlT2JqZWN0EiUubmltYnVzX3B1YmxpYy52MS5EZWxldGVPYmplY3RSZXF1ZXN0GiYubmltYnVzX3B1YmxpYy52MS5EZWxldGVPYmplY3RSZXNwb25zZRJpChBVcGRhdGVBY2Nlc3NUeXBlEikubmltYnVzX3B1YmxpYy52MS5VcGRhdGVBY2Nlc3NUeXBlUmVxdWVzdBoqLm5pbWJ1c19wdWJsaWMudjEuVXBkYXRlQWNjZXNzVHlwZVJlc3BvbnNlEnIKE0dldERpcmVjdG9yeUNvbnRlbnQSLC5uaW1idXNfcHVibGljLnYxLkdldERpcmVjdG9yeUNvbnRlbnRSZXF1ZXN0Gi0ubmltYnVzX3B1YmxpYy52MS5HZXREaXJlY3RvcnlDb250ZW50UmVzcG9uc2USYwoORmluZE9iamVjdEJ5SWQSJy5uaW1idXNfcHVibGljLnYxLkZpbmRPYmplY3RCeUlkUmVxdWVzdBooLm5pbWJ1c19wdWJsaWMudjEuRmluZE9iamVjdEJ5SWRSZXNwb25zZRJXCgpSZW5hbWVGaWxlEiMubmltYnVzX3B1YmxpYy52MS5SZW5hbWVGaWxlUmVxdWVzdBokLm5pbWJ1c19wdWJsaWMudjEuUmVuYW1lRmlsZVJlc3BvbnNlElEKCENvcHlGaWxlEiEubmltYnVzX3B1YmxpYy52MS5Db3B5RmlsZVJlcXVlc3QaIi5uaW1idXNfcHVibGljLnYxLkNvcHlGaWxlUmVzcG9uc2ViBnByb3RvMw");
 
 /**
  * Describes the message nimbus_public.v1.ObjectDetails.
  * Use `create(ObjectDetailsSchema)` to create a new message.
  */
 export const ObjectDetailsSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 3);
+  messageDesc(file_nimbus_public_v1_main, 0);
 
 /**
  * Describes the message nimbus_public.v1.PutObjectRequest.
  * Use `create(PutObjectRequestSchema)` to create a new message.
  */
 export const PutObjectRequestSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 4);
+  messageDesc(file_nimbus_public_v1_main, 1);
 
 /**
  * Describes the message nimbus_public.v1.PutObjectResponse.
  * Use `create(PutObjectResponseSchema)` to create a new message.
  */
 export const PutObjectResponseSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 5);
+  messageDesc(file_nimbus_public_v1_main, 2);
 
 /**
  * Describes the message nimbus_public.v1.GetObjectRequest.
  * Use `create(GetObjectRequestSchema)` to create a new message.
  */
 export const GetObjectRequestSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 6);
+  messageDesc(file_nimbus_public_v1_main, 3);
 
 /**
  * Describes the message nimbus_public.v1.GetObjectResponse.
  * Use `create(GetObjectResponseSchema)` to create a new message.
  */
 export const GetObjectResponseSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 7);
+  messageDesc(file_nimbus_public_v1_main, 4);
 
 /**
  * Describes the message nimbus_public.v1.DeleteObjectRequest.
  * Use `create(DeleteObjectRequestSchema)` to create a new message.
  */
 export const DeleteObjectRequestSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 8);
+  messageDesc(file_nimbus_public_v1_main, 5);
 
 /**
  * Describes the message nimbus_public.v1.DeleteObjectResponse.
  * Use `create(DeleteObjectResponseSchema)` to create a new message.
  */
 export const DeleteObjectResponseSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 9);
+  messageDesc(file_nimbus_public_v1_main, 6);
 
 /**
  * Describes the message nimbus_public.v1.UpdateAccessTypeRequest.
  * Use `create(UpdateAccessTypeRequestSchema)` to create a new message.
  */
 export const UpdateAccessTypeRequestSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 10);
+  messageDesc(file_nimbus_public_v1_main, 7);
 
 /**
  * Describes the message nimbus_public.v1.UpdateAccessTypeResponse.
  * Use `create(UpdateAccessTypeResponseSchema)` to create a new message.
  */
 export const UpdateAccessTypeResponseSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 11);
+  messageDesc(file_nimbus_public_v1_main, 8);
+
+/**
+ * Describes the message nimbus_public.v1.UpdateAccessTypeResponse.ObjectAccessInfo.
+ * Use `create(UpdateAccessTypeResponse_ObjectAccessInfoSchema)` to create a new message.
+ */
+export const UpdateAccessTypeResponse_ObjectAccessInfoSchema = /*@__PURE__*/
+  messageDesc(file_nimbus_public_v1_main, 8, 0);
 
 /**
  * Describes the message nimbus_public.v1.GetDirectoryContentRequest.
  * Use `create(GetDirectoryContentRequestSchema)` to create a new message.
  */
 export const GetDirectoryContentRequestSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 12);
+  messageDesc(file_nimbus_public_v1_main, 9);
 
 /**
  * Describes the message nimbus_public.v1.GetDirectoryContentResponse.
  * Use `create(GetDirectoryContentResponseSchema)` to create a new message.
  */
 export const GetDirectoryContentResponseSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 13);
+  messageDesc(file_nimbus_public_v1_main, 10);
 
 /**
  * Describes the message nimbus_public.v1.GetDirectoryContentResponse.ObjectInfo.
  * Use `create(GetDirectoryContentResponse_ObjectInfoSchema)` to create a new message.
  */
 export const GetDirectoryContentResponse_ObjectInfoSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 13, 0);
+  messageDesc(file_nimbus_public_v1_main, 10, 0);
 
 /**
  * Describes the message nimbus_public.v1.FindObjectByIdRequest.
  * Use `create(FindObjectByIdRequestSchema)` to create a new message.
  */
 export const FindObjectByIdRequestSchema = /*@__PURE__*/
-  messageDesc(file_nimbus_public_v1_main, 14);
+  messageDesc(file_nimbus_public_v1_main, 11);
 
 /**
  * Describes the message nimbus_public.v1.FindObjectByIdResponse.
  * Use `create(FindObjectByIdResponseSchema)` to create a new message.
  */
 export const FindObjectByIdResponseSchema = /*@__PURE__*/
+  messageDesc(file_nimbus_public_v1_main, 12);
+
+/**
+ * Describes the message nimbus_public.v1.RenameFileRequest.
+ * Use `create(RenameFileRequestSchema)` to create a new message.
+ */
+export const RenameFileRequestSchema = /*@__PURE__*/
+  messageDesc(file_nimbus_public_v1_main, 13);
+
+/**
+ * Describes the message nimbus_public.v1.RenameFileResponse.
+ * Use `create(RenameFileResponseSchema)` to create a new message.
+ */
+export const RenameFileResponseSchema = /*@__PURE__*/
+  messageDesc(file_nimbus_public_v1_main, 14);
+
+/**
+ * Describes the message nimbus_public.v1.CopyFileRequest.
+ * Use `create(CopyFileRequestSchema)` to create a new message.
+ */
+export const CopyFileRequestSchema = /*@__PURE__*/
   messageDesc(file_nimbus_public_v1_main, 15);
+
+/**
+ * Describes the message nimbus_public.v1.CopyFileResponse.
+ * Use `create(CopyFileResponseSchema)` to create a new message.
+ */
+export const CopyFileResponseSchema = /*@__PURE__*/
+  messageDesc(file_nimbus_public_v1_main, 16);
 
 /**
  * Describes the enum nimbus_public.v1.ObjectType.

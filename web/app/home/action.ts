@@ -1,7 +1,11 @@
 "use server";
 
 import { createClient } from "@connectrpc/connect";
-import { NimbusPublicService } from "@/proto-gen/nimbus_public/v1/main_pb";
+import {
+  NimbusPublicService,
+  AccessType,
+  ObjectType,
+} from "@/proto-gen/nimbus_public/v1/main_pb";
 import { createGrpcTransport } from "@connectrpc/connect-node";
 
 const lb_transport = createGrpcTransport({
@@ -20,6 +24,7 @@ export async function uploadFiles(formData: FormData) {
     return createClient(NimbusPublicService, newTransport);
   }
 
+  // Generator to stream the file data.
   async function* createFileStream(
     file: File,
   ): AsyncGenerator<{ data: Uint8Array }> {
@@ -44,19 +49,19 @@ export async function uploadFiles(formData: FormData) {
 
   const files = formData.getAll("files") as File[];
 
+  // Parallaly stream multiple files.
   const res = await Promise.all(
     files.map(async (file) => {
       const client = await getNewClient();
       return client.putObject(createFileStream(file), {
         headers: {
           object_id: file.name,
-          access_type: "public",
-          object_type: file.size.toString(),
+          access_type: AccessType.PRIVATE.toString(),
+          object_type: ObjectType.FILE.toString(),
           meta_data: JSON.stringify({}),
+          content_type: file.type,
         },
       });
     }),
   );
-
-  console.log(res.length);
 }
