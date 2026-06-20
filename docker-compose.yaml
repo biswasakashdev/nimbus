@@ -8,6 +8,10 @@ services:
       - POSTGRES_PASSWORD=example
       - POSTGRES_USER=dev
       - POSTGRES_PASSWORD=password
-  cassandra:
-    image: cassandra:5.0.8-bookworm
-    container_name: nimbus_cassandra
+  scylla:
+    image: scylladb/scylla:2025.1
+    container_name: nimbus_scylla
+    ports:
+      - "9042:9042"
+
+
