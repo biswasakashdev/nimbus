@@ -9,15 +9,28 @@ use tokio::sync::mpsc;
 use tokio_stream::{Stream, wrappers::ReceiverStream};
 use tonic::{Request, Response, Status, Streaming};
 
+use crate::storage::Storage;
+
 pub mod nimbus_proto {
     include!("../proto-gen/nimbus_public/v1/nimbus_public.v1.rs");
 }
 
 #[derive(Default, Debug)]
-pub struct NimbusCoreService {}
+pub struct NimbusCoreService<T> {
+    storage: T,
+}
+
+impl<T: Storage> NimbusCoreService<T> {
+    pub fn new(sn: T) -> NimbusCoreService<T> {
+        NimbusCoreService { storage: sn }
+    }
+}
 
 #[tonic::async_trait]
-impl NimbusPublicService for NimbusCoreService {
+impl<T> NimbusPublicService for NimbusCoreService<T>
+where
+    T: Storage + Send + 'static,
+{
     // Define the type signature for our response stream
     type GetObjectStream = Pin<Box<dyn Stream<Item = Result<GetObjectResponse, Status>> + Send>>;
 
@@ -26,9 +39,18 @@ impl NimbusPublicService for NimbusCoreService {
         &self,
         request: Request<Streaming<PutObjectRequest>>,
     ) -> Result<Response<PutObjectResponse>, Status> {
-        let mut _stream = request.into_inner();
-        let data = PutObjectResponse::default();
-        Ok(Response::from(data))
+        let object_id = &request
+            .metadata()
+            .get("object_id")
+            .and_then(|v| v.to_str().ok())
+            .unwrap()
+            .to_string();
+
+        println!("{}", object_id);
+        let stream = request.into_inner();
+
+        let data = self.storage.save(stream, &object_id).await?;
+        Ok(Response::new(data))
     }
 
     async fn get_object(
