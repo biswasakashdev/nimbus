@@ -1,4 +1,4 @@
-use nimbus_public::v1::{
+use crate::proto_gen::nimbus_public::v1::{
     CopyFileRequest, CopyFileResponse, DeleteObjectRequest, DeleteObjectResponse,
     FindObjectByIdRequest, FindObjectByIdResponse, GetDirectoryContentRequest,
     GetDirectoryContentResponse, GetObjectRequest, GetObjectResponse, PutObjectRequest,
@@ -17,18 +17,6 @@ pub mod proto_gen {
         pub mod v1 {}
     }
     pub mod nimbus_public {}
-}
-
-pub mod nimbus_types {
-    pub mod v1 {
-        include!("../../proto-gen/nimbus_types/v1/nimbus_types.v1.rs");
-    }
-}
-
-pub mod nimbus_public {
-    pub mod v1 {
-        include!("../../proto-gen/nimbus_public/v1/nimbus_public.v1.rs");
-    }
 }
 
 #[derive(Default, Debug)]

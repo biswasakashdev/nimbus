@@ -1,22 +1,23 @@
 version: v2
 inputs:
-  # Here we provide the proto files directly from github no need to clone at runtime.
   - git_repo: https://github.com/biswasakashdev/nimbus-proto.git
     branch: main
     # Directory where all proto files are located.
     # subdir: proto
     paths:
       - proto/nimbus_types/
-      - proto/nimbus_public/
+      - proto/nimbus_cluster_lb/
     # Depth define how many commits need to copy. no need to copy all the previous commits.
     depth: 30
+
   - directory: .
     paths:
       - proto/service_discovery/
+
 plugins:
   # community/neoeinstein-tonic depends on community/neoeinstein-prost
   - remote: buf.build/community/neoeinstein-prost:v0.5.0
-    out: services/nimbus-core/out
+    out: services/service-discovery/out
 
   - remote: buf.build/community/neoeinstein-tonic:v0.5.0
-    out: services/nimbus-core/out
+    out: services/service-discovery/out

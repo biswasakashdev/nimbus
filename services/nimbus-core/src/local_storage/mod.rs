@@ -1,5 +1,8 @@
 use crate::{
-    nimbus_object_service::nimbus_types::v1::{AccessType, ObjectType},
+    proto_gen::{
+        nimbus_public::v1::PutObjectRequest,
+        nimbus_types::v1::{AccessType, ObjectType},
+    },
     storage::{NimbusObject, Storage},
 };
 use std::path::Path;
@@ -8,8 +11,6 @@ use tokio::{
     io::AsyncWriteExt,
 };
 use tonic::{Request, Status, Streaming, metadata::MetadataMap};
-
-use crate::nimbus_object_service::nimbus_public::v1::PutObjectRequest;
 
 use std::result::Result;
 use std::sync::Mutex;

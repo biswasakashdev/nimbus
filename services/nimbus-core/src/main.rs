@@ -1,11 +1,12 @@
 pub mod local_storage;
 pub mod nimbus_object_service;
+pub mod proto_gen;
 pub mod storage;
 pub mod storage_cluster;
 
-use nimbus_object_service::{
-    NimbusCoreService, nimbus_public::v1::nimbus_public_service_server::NimbusPublicServiceServer,
-};
+use proto_gen::nimbus_public::v1::nimbus_public_service_server::NimbusPublicServiceServer;
+
+use nimbus_object_service::NimbusCoreService;
 
 use scylla::client::session_builder::SessionBuilder;
 use tonic::transport::Server;

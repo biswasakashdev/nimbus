@@ -1,5 +1,7 @@
-use crate::nimbus_object_service::nimbus_public::v1::PutObjectRequest;
-use crate::nimbus_object_service::nimbus_types::v1::{AccessType, ObjectDetails, ObjectType};
+use crate::proto_gen::{
+    nimbus_public::v1::PutObjectRequest,
+    nimbus_types::v1::{AccessType, ObjectDetails, ObjectType},
+};
 use crate::storage::NimbusObjectAccessType::{PrivateAccess, PublicAccess};
 use chrono::{DateTime, Utc};
 use std::collections::hash_map;
