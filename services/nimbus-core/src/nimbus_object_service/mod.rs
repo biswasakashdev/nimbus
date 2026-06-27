@@ -1,4 +1,4 @@
-use nimbus_proto::{
+use nimbus_public::v1::{
     CopyFileRequest, CopyFileResponse, DeleteObjectRequest, DeleteObjectResponse,
     FindObjectByIdRequest, FindObjectByIdResponse, GetDirectoryContentRequest,
     GetDirectoryContentResponse, GetObjectRequest, GetObjectResponse, PutObjectRequest,
@@ -12,8 +12,23 @@ use tonic::{Request, Response, Status, Streaming};
 
 use crate::storage::{NimbusObject, Storage};
 
-pub mod nimbus_proto {
-    include!("../../proto-gen/nimbus_public/v1/nimbus_public.v1.rs");
+pub mod proto_gen {
+    pub mod nimbus_types {
+        pub mod v1 {}
+    }
+    pub mod nimbus_public {}
+}
+
+pub mod nimbus_types {
+    pub mod v1 {
+        include!("../../proto-gen/nimbus_types/v1/nimbus_types.v1.rs");
+    }
+}
+
+pub mod nimbus_public {
+    pub mod v1 {
+        include!("../../proto-gen/nimbus_public/v1/nimbus_public.v1.rs");
+    }
 }
 
 #[derive(Default, Debug)]
@@ -113,13 +128,13 @@ where
 
     async fn rename_file(
         &self,
-        request: Request<RenameFileRequest>,
+        _request: Request<RenameFileRequest>,
     ) -> Result<Response<RenameFileResponse>, Status> {
         Ok(Response::new(RenameFileResponse::default()))
     }
     async fn copy_file(
         &self,
-        request: Request<CopyFileRequest>,
+        _request: Request<CopyFileRequest>,
     ) -> Result<Response<CopyFileResponse>, Status> {
         Ok(Response::new(CopyFileResponse::default()))
     }

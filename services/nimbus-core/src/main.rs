@@ -4,7 +4,7 @@ pub mod storage;
 pub mod storage_cluster;
 
 use nimbus_object_service::{
-    NimbusCoreService, nimbus_proto::nimbus_public_service_server::NimbusPublicServiceServer,
+    NimbusCoreService, nimbus_public::v1::nimbus_public_service_server::NimbusPublicServiceServer,
 };
 
 use scylla::client::session_builder::SessionBuilder;

@@ -1,8 +1,5 @@
-use crate::nimbus_object_service::nimbus_proto::AccessType::Public;
-use crate::nimbus_object_service::nimbus_proto::ObjectType::File;
-use crate::nimbus_object_service::nimbus_proto::{
-    AccessType, ObjectDetails, ObjectType, PutObjectRequest,
-};
+use crate::nimbus_object_service::nimbus_public::v1::PutObjectRequest;
+use crate::nimbus_object_service::nimbus_types::v1::{AccessType, ObjectDetails, ObjectType};
 use crate::storage::NimbusObjectAccessType::{PrivateAccess, PublicAccess};
 use chrono::{DateTime, Utc};
 use std::collections::hash_map;
@@ -55,11 +52,11 @@ impl NimbusObject {
             object_size_bytes: object_size,
             access_url: None,
             access_type: match acccess_type {
-                Public => NimbusObjectAccessType::PublicAccess,
+                AccessType::Public => NimbusObjectAccessType::PublicAccess,
                 _ => NimbusObjectAccessType::PrivateAccess,
             },
             object_type: match object_type {
-                File => NimbusObjectType::File,
+                ObjectType::File => NimbusObjectType::File,
                 _ => NimbusObjectType::Dir,
             },
             created_on: Utc::now(),

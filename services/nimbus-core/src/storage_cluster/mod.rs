@@ -1,13 +1,11 @@
-use scylla::client::{session::Session, session_builder::SessionBuilder};
-
-use crate::storage::Storage;
+use scylla::client::session::Session;
 
 pub struct StorageCluster {
     session: Session,
 }
 
 impl StorageCluster {
-    fn new(session: Session) -> Self {
+    pub fn new(session: Session) -> Self {
         Self { session: session }
     }
 }
