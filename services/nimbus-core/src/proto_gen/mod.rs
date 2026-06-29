@@ -10,8 +10,8 @@ pub mod nimbus_public {
     }
 }
 
-pub mod service_discovery {
+pub mod nimbus_cluster_lb {
     pub mod v1 {
-        include!("../../out/service_discovery/v1/service_discovery.v1.rs");
+        include!("../../out/nimbus_cluster_lb/v1/nimbus_cluster_lb.v1.rs");
     }
 }

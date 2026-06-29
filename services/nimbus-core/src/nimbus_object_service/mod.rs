@@ -12,13 +12,6 @@ use tonic::{Request, Response, Status, Streaming};
 
 use crate::storage::{NimbusObject, Storage};
 
-pub mod proto_gen {
-    pub mod nimbus_types {
-        pub mod v1 {}
-    }
-    pub mod nimbus_public {}
-}
-
 #[derive(Default, Debug)]
 pub struct NimbusCoreService<T> {
     storage: T,

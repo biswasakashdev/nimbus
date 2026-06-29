@@ -1,18 +1,16 @@
-pub mod event_streamer;
+pub mod cluster_lb;
 pub mod local_storage;
 pub mod nimbus_object_service;
 pub mod proto_gen;
 pub mod storage;
-pub mod storage_cluster;
 
 use proto_gen::{
+    nimbus_cluster_lb::v1::url_generator_service_server::UrlGeneratorServiceServer,
     nimbus_public::v1::nimbus_public_service_server::NimbusPublicServiceServer,
-    service_discovery::v1::nimbus_core_service_discovery_service_client::NimbusCoreServiceDiscoveryServiceClient,
 };
 
 use nimbus_object_service::NimbusCoreService;
 
-use scylla::client::{self, session_builder::SessionBuilder};
 use tonic::transport::Server;
 
 use crate::local_storage::LocalStorageCluster;
@@ -21,19 +19,19 @@ use crate::local_storage::LocalStorageCluster;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tokio::spawn(async {});
 
-    let addr = "[::1]:50052".parse()?;
-    let scylla_url = "127.0.0.1:9042";
-    let storage = NimbusCoreService::new(LocalStorageCluster::new());
+    let addr_str = "127.0.0.1:50051";
 
-    let _scylla_session = SessionBuilder::new().known_node(scylla_url).build().await?;
+    let storage_service = NimbusCoreService::new(LocalStorageCluster::new());
+    let lb_service = cluster_lb::ClusterLB::new(&addr_str);
 
-    println!("Connected to scylla DB.");
+    println!("gRPC Server listening on {}", addr_str);
 
-    println!("gRPC Server listening on {}", addr);
+    let sock_addr = addr_str.parse()?;
 
     Server::builder()
-        .add_service(NimbusPublicServiceServer::new(storage))
-        .serve(addr)
+        .add_service(NimbusPublicServiceServer::new(storage_service))
+        .add_service(UrlGeneratorServiceServer::new(lb_service))
+        .serve(sock_addr)
         .await?;
 
     Ok(())

@@ -8,11 +8,9 @@ inputs:
     paths:
       - proto/nimbus_types/
       - proto/nimbus_public/
+      - proto/nimbus_cluster_lb/
     # Depth define how many commits need to copy. no need to copy all the previous commits.
     depth: 30
-  - directory: .
-    paths:
-      - proto/service_discovery/
 plugins:
   # community/neoeinstein-tonic depends on community/neoeinstein-prost
   - remote: buf.build/community/neoeinstein-prost:v0.5.0

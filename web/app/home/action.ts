@@ -11,6 +11,7 @@ import { createGrpcTransport } from "@connectrpc/connect-node";
 const lb_transport = createGrpcTransport({
   baseUrl: "http://localhost:50051",
 });
+
 export async function uploadFiles(formData: FormData) {
   // TODO: Implement the logic to send bytes to the server.
 

@@ -6,11 +6,7 @@ edition = "2024"
 [dependencies]
 chrono = "0.4.45"
 prost = "0.14.4"
-scylla = "1.7.0"
 tokio = { version = "1", features = ["full"] }
 tokio-stream = "0.1.18"
 tonic = "0.14.6"
 tonic-prost = "0.14.6"
-
-[dev-dependencies]
-tonic-build = "0.14.6"
